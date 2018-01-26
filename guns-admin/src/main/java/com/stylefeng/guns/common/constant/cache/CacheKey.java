@@ -19,5 +19,9 @@ public interface CacheKey {
 
     String DEPT_NAME = "dept_name_";
 
+    /**
+     * 根据字典名称和字典中的值获取对应的名称 缓存key开头标识
+     */
+    String DICT_PNAME_VAL = "dict_pname_val_";
 
 }

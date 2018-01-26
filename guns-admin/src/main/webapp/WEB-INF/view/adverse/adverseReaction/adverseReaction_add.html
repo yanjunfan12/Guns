@@ -1,0 +1,60 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <!--<#input id="id" name="主键id" underline="true"/>-->
+                            <#input id="patientNumber" name="住院号" underline="true"/>
+                            <#input id="name" name="姓名" underline="true"/>
+                            <#input id="radiotherapyCount" name="放疗次数" underline="true"/>
+                            <#input id="chemotherapyCount" name="化疗次数" underline="true"/>
+                            <#input id="weight" name="体重(单位kg)" underline="true"/>
+                            <#select id="dietaryStatus" name="目前饮食" underline="true">
+								<option value="1">正常饮食</option>
+								<option value="2">半流质</option>
+							    <option value="3">流质</option>
+								<option value="4">完全梗阻</option>
+							</#select>
+                            <#input id="weakStatus" name="乏力 " underline="true"/>
+                            <#input id="nauseaStatus" name="恶心" underline="true"/>
+                            <#input id="vomitStatus" name="呕吐" underline="true"/>
+                            <#input id="diarrheaStatus" name="腹泻 " underline="true"/>
+                            <#input id="constipationStatus" name="便秘 " underline="true"/>
+                            <#input id="muscleJointPainStatus" name="肌肉关节痛" underline="true"/>
+                            <#input id="nervousSystemStatus" name="神经系统" underline="true"/>
+                            <#input id="alopeciaStatus" name="脱发" underline="true"/>
+                            <#input id="feverStatus" name="发热 "/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="coughStatus" name="咳嗽 " underline="true"/>
+                            <#input id="skinStatus" name="放射性皮肤损伤" underline="true"/>
+                            <#input id="hiccupStatus" name="打嗝 " underline="true"/>
+                            <#input id="oralMucositisStatus" name="口腔黏膜炎 " underline="true"/>
+                            <#input id="hoarsenessStatus" name="声嘶 " underline="true"/>
+                            <#input id="hearingStatus" name="听力损伤" underline="true"/>
+                            <#input id="dizzyStatus" name="头晕 " underline="true"/>
+                            <#input id="headacheStatus" name="头痛 " underline="true"/>
+                            <#input id="pneumoniaStatus" name="肺炎" underline="true"/>
+                            <#input id="esophagitisStatus" name="进食痛 (食管炎)" underline="true"/>
+                            <#input id="otherStatusesDesc" name="其他症状，请在下面详细描述：" underline="true"/>
+                            <#input id="photoPath" name="图像说明" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="AdverseReactionInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="AdverseReactionInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/adverse/adverseReaction/adverseReaction_info.js"></script>
+@}

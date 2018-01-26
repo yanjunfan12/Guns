@@ -225,6 +225,7 @@ public class ConstantFactory implements IConstantFactory {
      * 根据字典名称和字典中的值获取对应的名称
      */
     @Override
+    @Cacheable(value = Cache.CONSTANT, key = "'" + CacheKey.DICT_PNAME_VAL + "'+#name+'_'+#val")
     public String getDictsByName(String name, Integer val) {
         Dict temp = new Dict();
         temp.setName(name);

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.AdverseReactionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.AdverseReaction">
+        <id column="id" property="id" />
+        <result column="patient_number" property="patientNumber" />
+        <result column="name" property="name" />
+        <result column="radiotherapy_count" property="radiotherapyCount" />
+        <result column="chemotherapy_count" property="chemotherapyCount" />
+        <result column="weight" property="weight" />
+        <result column="Dietary_status" property="dietaryStatus" />
+        <result column="weak_status" property="weakStatus" />
+        <result column="nausea_status" property="nauseaStatus" />
+        <result column="Vomit_status" property="vomitStatus" />
+        <result column="diarrhea_status" property="diarrheaStatus" />
+        <result column="constipation_status" property="constipationStatus" />
+        <result column="Muscle_joint_pain_status" property="muscleJointPainStatus" />
+        <result column="nervous_system_status" property="nervousSystemStatus" />
+        <result column="Alopecia_status" property="alopeciaStatus" />
+        <result column="fever_status" property="feverStatus" />
+        <result column="cough_status" property="coughStatus" />
+        <result column="skin_status" property="skinStatus" />
+        <result column="Hiccup_status" property="hiccupStatus" />
+        <result column="Oral_mucositis_status" property="oralMucositisStatus" />
+        <result column="Hoarseness_status" property="hoarsenessStatus" />
+        <result column="hearing_status" property="hearingStatus" />
+        <result column="Dizzy_status" property="dizzyStatus" />
+        <result column="headache_status" property="headacheStatus" />
+        <result column="pneumonia_status" property="pneumoniaStatus" />
+        <result column="Esophagitis_status" property="esophagitisStatus" />
+        <result column="other_statuses_desc" property="otherStatusesDesc" />
+        <result column="photo_path" property="photoPath" />
+        <result column="createtime" property="createtime" />
+        <result column="updatetime" property="updatetime" />
+        <result column="version" property="version" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, patient_number AS patientNumber, name, radiotherapy_count AS radiotherapyCount, chemotherapy_count AS chemotherapyCount, weight, Dietary_status AS dietaryStatus, weak_status AS weakStatus, nausea_status AS nauseaStatus, Vomit_status AS vomitStatus, diarrhea_status AS diarrheaStatus, constipation_status AS constipationStatus, Muscle_joint_pain_status AS muscleJointPainStatus, nervous_system_status AS nervousSystemStatus, Alopecia_status AS alopeciaStatus, fever_status AS feverStatus, cough_status AS coughStatus, skin_status AS skinStatus, Hiccup_status AS hiccupStatus, Oral_mucositis_status AS oralMucositisStatus, Hoarseness_status AS hoarsenessStatus, hearing_status AS hearingStatus, Dizzy_status AS dizzyStatus, headache_status AS headacheStatus, pneumonia_status AS pneumoniaStatus, Esophagitis_status AS esophagitisStatus, other_statuses_desc AS otherStatusesDesc, photo_path AS photoPath, createtime, updatetime, version
+    </sql>
+
+</mapper>
