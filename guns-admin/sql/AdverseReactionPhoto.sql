@@ -1,0 +1,1 @@
+INSERT INTO `guns`.`sys_menu` (`id`, `code`, `pcode`, `pcodes`, `name`, `icon`, `url`, `num`, `levels`, `ismenu`, `tips`, `status`, `isopen`) VALUES ('957238471160668163', 'adverseReactionPhoto_add', 'adverseReaction', '[0],[system],[adverseReaction],', '图片附件添加', '', '/adverseReactionPhoto/add', '99', '3', '0', NULL, '1', '0');

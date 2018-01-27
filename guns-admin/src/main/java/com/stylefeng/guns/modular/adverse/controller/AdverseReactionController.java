@@ -3,29 +3,40 @@ package com.stylefeng.guns.modular.adverse.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baomidou.mybatisplus.enums.SqlLike;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.common.persistence.model.AdverseReaction;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.base.tips.ErrorTip;
+import com.stylefeng.guns.core.base.tips.Tip;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.modular.adverse.service.IAdverseReactionService;
 import com.stylefeng.guns.modular.adverse.warpper.AdverseReactionWarpper;
 
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 不良反应记录控制器
  *
- * @author fengshuonan
+ * @author fanyj
  * @Date 2018-01-26 20:06:23
  */
 @Controller
 @RequestMapping("/adverseReaction")
 public class AdverseReactionController extends BaseController {
+
+    private String PHOTO_PREFIX = "/adverse/adverseReactionPhoto/";
 
     private String PREFIX = "/adverse/adverseReaction/";
 
@@ -60,33 +71,46 @@ public class AdverseReactionController extends BaseController {
     }
 
     /**
+     * 跳转到给某一条不良反应添加附件
+     */
+    @RequestMapping("/adverseReaction_upload/{adverseReactionId}")
+    public String adverseReactionUpload(@PathVariable Integer adverseReactionId, Model model) {
+        AdverseReaction adverseReaction = adverseReactionService.selectById(adverseReactionId);
+        model.addAttribute("item",adverseReaction);
+        LogObjectHolder.me().set(adverseReaction);
+        return PHOTO_PREFIX + "adverseReactionPhoto_add.html";
+    }
+
+    /**
      * 获取不良反应记录列表
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
-        List<Map<String, Object>> stringObjectMap = adverseReactionService.selectMaps(null);
+    public Object list(@RequestParam(required = false) String name, @RequestParam(required = false) String patientNumber) {
+        EntityWrapper<AdverseReaction> adverseReactionEntityWrapper = new EntityWrapper<AdverseReaction>();
+        if(!StringUtils.isBlank(name))
+        	adverseReactionEntityWrapper.like("name", name,SqlLike.RIGHT);
+        if(!StringUtils.isBlank(patientNumber))
+        	adverseReactionEntityWrapper.eq("patient_number", patientNumber);
+
+    	List<Map<String, Object>> stringObjectMap = adverseReactionService.selectMaps(adverseReactionEntityWrapper);
         return super.warpObject(new AdverseReactionWarpper(stringObjectMap));
     }
 
     /**
      * 新增不良反应记录
      */
-    @RequestMapping(value = "/add")
+    @ApiOperation("新增不良反应记录")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public Object add(AdverseReaction adverseReaction) {
-        adverseReactionService.insert(adverseReaction);
-        return super.SUCCESS_TIP;
-    }
+    public Tip add(@RequestBody AdverseReaction adverseReaction) {
+    	if(null==adverseReaction)
+    		return new ErrorTip(301,"操作失败，入参为null");
 
-    /**
-     * 删除不良反应记录
-     */
-    @RequestMapping(value = "/delete")
-    @ResponseBody
-    public Object delete(@RequestParam Integer adverseReactionId) {
-        adverseReactionService.deleteById(adverseReactionId);
-        return SUCCESS_TIP;
+        adverseReactionService.insert(adverseReaction);
+
+        int id=adverseReaction.getId();
+        return new ErrorTip(200,id+"");
     }
 
     /**

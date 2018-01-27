@@ -88,9 +88,6 @@ AdverseReactionInfoDlg.collectData = function() {
     .set('pneumoniaStatus')
     .set('esophagitisStatus')
     .set('otherStatusesDesc')
-    .set('photoPath')
-    .set('createtime')
-    .set('updatetime')
     ;
 }
 
@@ -110,7 +107,10 @@ AdverseReactionInfoDlg.addSubmit = function() {
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
-    ajax.set(this.adverseReactionInfoData);
+    var jsonData=JSON.stringify(this.adverseReactionInfoData);
+    Feng.log("jsonData="+jsonData);
+    ajax.setData(jsonData);
+    ajax.setContentType("application/json");
     ajax.start();
 }
 

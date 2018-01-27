@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * 治疗过程中不良反应记录（病人填表） Mapper 接口
  * </p>
  *
- * @author stylefeng123
- * @since 2018-01-26
+ * @author fanyj123
+ * @since 2018-01-27
  */
 public interface AdverseReactionMapper extends BaseMapper<AdverseReaction> {
 

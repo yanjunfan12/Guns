@@ -1,21 +1,24 @@
 package com.stylefeng.guns.core.base.controller;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.stylefeng.guns.core.base.tips.SuccessTip;
-import com.stylefeng.guns.core.base.warpper.BaseControllerWarpper;
-import com.stylefeng.guns.core.page.PageInfoBT;
-import com.stylefeng.guns.core.support.HttpKit;
-import com.stylefeng.guns.core.util.FileUtil;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
+import com.baomidou.mybatisplus.plugins.Page;
+import com.stylefeng.guns.core.base.tips.ErrorTip;
+import com.stylefeng.guns.core.base.tips.SuccessTip;
+import com.stylefeng.guns.core.base.warpper.BaseControllerWarpper;
+import com.stylefeng.guns.core.page.PageInfoBT;
+import com.stylefeng.guns.core.support.HttpKit;
+import com.stylefeng.guns.core.util.FileUtil;
 
 public class BaseController {
 

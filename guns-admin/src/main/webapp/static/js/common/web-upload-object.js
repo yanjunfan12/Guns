@@ -1,14 +1,14 @@
 /**
  * web-upload 工具类
- * 
+ *
  * 约定：
  * 上传按钮的id = 图片隐藏域id + 'BtnId'
  * 图片预览框的id = 图片隐藏域id + 'PreId'
- * 
+ *
  * @author fengshuonan
  */
 (function() {
-	
+
 	var $WebUpload = function(pictureId) {
 		this.pictureId = pictureId;
 		this.uploadBtnId = pictureId + "BtnId";
@@ -29,7 +29,7 @@
 			this.bindEvent(uploader);
 			return uploader;
 		},
-		
+
 		/**
 		 * 创建webuploader对象
 		 */
@@ -52,7 +52,7 @@
 				server : this.uploadUrl,
 				fileSingleSizeLimit : this.fileSizeLimit
 			});
-			
+
 			return webUploader;
 		},
 
@@ -118,7 +118,14 @@
          */
         setUploadBarId: function (id) {
             this.uploadBarId = id;
-        }
+        },
+
+        /**
+         * 设置图片上传的服务端路径
+         */
+        setUploadUrl:function (uploadUrl) {
+            this.uploadUrl = uploadUrl;
+        },
 	};
 
 	window.$WebUpload = $WebUpload;

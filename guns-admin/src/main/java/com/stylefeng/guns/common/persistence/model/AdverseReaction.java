@@ -16,8 +16,8 @@ import java.io.Serializable;
  * 治疗过程中不良反应记录（病人填表）
  * </p>
  *
- * @author stylefeng123
- * @since 2018-01-26
+ * @author fanyj123
+ * @since 2018-01-27
  */
 @TableName("tbl_adverse_reaction")
 public class AdverseReaction extends Model<AdverseReaction> {
@@ -157,11 +157,6 @@ public class AdverseReaction extends Model<AdverseReaction> {
      */
     @TableField("other_statuses_desc")
     private String otherStatusesDesc;
-    /**
-     * 图像说明
-     */
-    @TableField("photo_path")
-    private String photoPath;
     /**
      * 填表日期
      */
@@ -392,14 +387,6 @@ public class AdverseReaction extends Model<AdverseReaction> {
         this.otherStatusesDesc = otherStatusesDesc;
     }
 
-    public String getPhotoPath() {
-        return photoPath;
-    }
-
-    public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
-    }
-
     public Date getCreatetime() {
         return createtime;
     }
@@ -459,7 +446,6 @@ public class AdverseReaction extends Model<AdverseReaction> {
         ", pneumoniaStatus=" + pneumoniaStatus +
         ", esophagitisStatus=" + esophagitisStatus +
         ", otherStatusesDesc=" + otherStatusesDesc +
-        ", photoPath=" + photoPath +
         ", createtime=" + createtime +
         ", updatetime=" + updatetime +
         ", version=" + version +

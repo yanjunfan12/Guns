@@ -32,8 +32,6 @@ CREATE TABLE `tbl_adverse_reaction` (
   `Esophagitis_status` int(11) DEFAULT NULL COMMENT '进食痛 （食管炎） ○ 0 无  ○ 1 疼痛轻微，无须处理或仅需口服药  ○ 2 疼痛中等，需静脉输液治疗  ○ 3 疼痛严重，需鼻饲（经管道进食）或肠外营养    ○ 4 食管穿孔 ',
   `other_statuses_desc` varchar(1000) DEFAULT NULL COMMENT '其他症状，请在下面详细描述：',
 
-  `photo_path` varchar(255) DEFAULT NULL COMMENT '图像说明',
-
   `createtime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '填表日期',
   `updatetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改日期',
 

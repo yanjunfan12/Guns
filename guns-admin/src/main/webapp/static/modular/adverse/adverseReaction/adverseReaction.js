@@ -41,10 +41,8 @@ AdverseReaction.initColumn = function () {
             {title: '肺炎', field: 'pneumoniaStatus', visible: true, align: 'center', valign: 'middle'},
             {title: '进食痛 （食管炎） ', field: 'esophagitisStatus', visible: true, align: 'center', valign: 'middle'},
             {title: '其他症状', field: 'otherStatusesDesc', visible: true, align: 'center', valign: 'middle'},
-            //{title: '图像说明', field: 'photoPath', visible: true, align: 'center', valign: 'middle'},
             {title: '填表日期', field: 'createtime', visible: true, align: 'center', valign: 'middle'},
             {title: '修改日期', field: 'updatetime', visible: true, align: 'center', valign: 'middle'},
-            //{title: '保留字段', field: 'version', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 
@@ -95,18 +93,19 @@ AdverseReaction.openAdverseReactionDetail = function () {
 };
 
 /**
- * 删除不良反应记录
+ * 给某一条不良反应添加附件
  */
-AdverseReaction.delete = function () {
+AdverseReaction.openAddAdverseReactionPhoto = function () {
     if (this.check()) {
-        var ajax = new $ax(Feng.ctxPath + "/adverseReaction/delete", function (data) {
-            Feng.success("删除成功!");
-            AdverseReaction.table.refresh();
-        }, function (data) {
-            Feng.error("删除失败!" + data.responseJSON.message + "!");
+        var index = layer.open({
+            type: 2,
+            title: '添加不良反应记录附件',
+            area: ['460px', '420px'], //宽高
+            fix: false, //不固定
+            maxmin: true,
+            content: Feng.ctxPath + '/adverseReaction/adverseReaction_upload/' + AdverseReaction.seItem.id
         });
-        ajax.set("adverseReactionId",this.seItem.id);
-        ajax.start();
+        this.layerIndex = index;
     }
 };
 
@@ -115,7 +114,8 @@ AdverseReaction.delete = function () {
  */
 AdverseReaction.search = function () {
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
+    queryData['name'] = $("#name").val();
+    queryData['patientNumber'] = $("#patientNumber").val();
     AdverseReaction.table.refresh({query: queryData});
 };
 
