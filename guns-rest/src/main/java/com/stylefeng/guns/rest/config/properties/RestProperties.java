@@ -19,7 +19,17 @@ public class RestProperties {
 
     private boolean signOpen = true;
 
-    public boolean isAuthOpen() {
+    private boolean swaggerOpen = true;
+
+    public boolean isSwaggerOpen() {
+		return swaggerOpen;
+	}
+
+	public void setSwaggerOpen(boolean swaggerOpen) {
+		this.swaggerOpen = swaggerOpen;
+	}
+
+	public boolean isAuthOpen() {
         return authOpen;
     }
 
