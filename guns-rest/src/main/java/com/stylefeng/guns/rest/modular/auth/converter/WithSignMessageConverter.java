@@ -48,7 +48,6 @@ public class WithSignMessageConverter extends FastJsonHttpMessageConverter {
         String md5KeyFromToken = jwtTokenUtil.getMd5KeyFromToken(token);
 
         String object = baseTransferEntity.getObject();
-        String json = dataSecurityAction.unlock(object);
         String encrypt = MD5Util.encrypt(object + md5KeyFromToken);
 
         if (encrypt.equals(baseTransferEntity.getSign())) {
@@ -59,6 +58,7 @@ public class WithSignMessageConverter extends FastJsonHttpMessageConverter {
         }
 
         //校验签名后再转化成应该的对象
+        String json = dataSecurityAction.unlock(object);
         return JSON.parseObject(json, type);
     }
 }
