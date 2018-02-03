@@ -93,6 +93,44 @@ AdverseReaction.openAdverseReactionDetail = function () {
 };
 
 /**
+ * 下载符合条件的不良反应列表
+ *
+ * ajax方式请求的数据只能存放在javascipt内存空间，可以通过javascript访问，但是无法保存到硬盘
+ * 故换为
+ * 模拟表单提交同步方式下载文件
+ * 能够弹出保存文件对话框
+ */
+AdverseReaction.exportAll = function () {
+    //提交信息
+	var downloadUrl= Feng.ctxPath + "/adverseReaction/exportAll";
+
+    Feng.log("downloadUrl="+downloadUrl);
+
+    var nameCon = $("#name").val();
+    var patientNumberCon = $("#patientNumber").val();
+
+    var form = $("<form></form>").attr("action", downloadUrl).attr("method", "post");
+    form.append($("<input></input>").attr("type", "hidden").attr("name", "name").attr("value", nameCon));
+    form.append($("<input></input>").attr("type", "hidden").attr("name", "patientNumber").attr("value", patientNumberCon));
+    form.appendTo('body').submit().remove();
+};
+
+/**
+ * 下载某一条不良反应的附件
+ */
+AdverseReaction.exportOne = function () {
+    if (this.check()) {
+        //提交信息
+    	var downloadUrl=Feng.ctxPath + "/adverseReactionPhoto/exportOne/" + AdverseReaction.seItem.id;
+
+        Feng.log("downloadUrl="+downloadUrl);
+
+        var form = $("<form></form>").attr("action", downloadUrl).attr("method", "post");
+        form.appendTo('body').submit().remove();
+    }
+};
+
+/**
  * 给某一条不良反应添加附件
  */
 AdverseReaction.openAddAdverseReactionPhoto = function () {

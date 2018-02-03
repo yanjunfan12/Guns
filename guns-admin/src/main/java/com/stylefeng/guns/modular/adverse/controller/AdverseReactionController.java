@@ -1,10 +1,15 @@
 package com.stylefeng.guns.modular.adverse.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.enums.SqlLike;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.stylefeng.guns.common.annotion.Permission;
 import com.stylefeng.guns.common.persistence.model.AdverseReaction;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
@@ -131,4 +137,26 @@ public class AdverseReactionController extends BaseController {
     public Object detail(@PathVariable("adverseReactionId") Integer adverseReactionId) {
         return adverseReactionService.selectById(adverseReactionId);
     }
+
+    /**
+     * 下载符合条件的不良反应列表
+     * @throws IOException
+     */
+    @Permission
+    @RequestMapping(value = "/exportAll")
+    public ResponseEntity<byte[]> exportAll(@RequestParam(required = false) String name, @RequestParam(required = false) String patientNumber) throws IOException {
+        EntityWrapper<AdverseReaction> adverseReactionEntityWrapper = new EntityWrapper<AdverseReaction>();
+        if(!StringUtils.isBlank(name))
+        	adverseReactionEntityWrapper.like("name", name,SqlLike.RIGHT);
+        if(!StringUtils.isBlank(patientNumber))
+        	adverseReactionEntityWrapper.eq("patient_number", patientNumber);
+
+    	List<Map<String, Object>> stringObjectMap = adverseReactionService.selectMaps(adverseReactionEntityWrapper);
+    	List<Map<String, Object>> list=(List<Map<String, Object>>) super.warpObject(new AdverseReactionWarpper(stringObjectMap));
+
+        byte[] bytes=ExcelUtils.buildBytes(list);
+		return renderFile("sxssf.xlsx", bytes);
+    }
+
+
 }

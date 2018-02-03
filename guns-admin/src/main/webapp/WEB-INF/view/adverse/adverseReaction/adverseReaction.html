@@ -14,7 +14,12 @@
                                 <#NameCon id="patientNumber" name="住院号" />
                             </div>
                             <div class="col-sm-3">
+                             @if(shiro.hasPermission("/adverseReaction/list")){
                                 <#button name="搜索" icon="fa-search" clickFun="AdverseReaction.search()"/>
+                             @}
+                             @if(shiro.hasPermission("/adverseReaction/exportAll")){
+                                <#button name="全部导出" icon="fa-search" clickFun="AdverseReaction.exportAll()"/>
+                             @}
                             </div>
                         </div>
                         <div class="hidden-xs" id="AdverseReactionTableToolbar" role="group">
@@ -24,8 +29,11 @@
                             @if(shiro.hasPermission("/adverseReaction/update")){
                                 <#button name="修改" icon="fa-plus" clickFun="AdverseReaction.openAdverseReactionDetail()" space="true"/>
                             @}
-                            @if(shiro.hasPermission("/adverseReactionPhoto/add")){
+                            @if(shiro.hasPermission("/adverseReactionPhoto/upload")){
                                 <#button name="上传附件" icon="fa-plus" clickFun="AdverseReaction.openAddAdverseReactionPhoto()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/adverseReactionPhoto/exportOne")){
+                                <#button name="下载附件" icon="fa-plus" clickFun="AdverseReaction.exportOne()" space="true"/>
                             @}
                         </div>
                         <#table id="AdverseReactionTable"/>

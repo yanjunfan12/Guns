@@ -1,11 +1,13 @@
 package com.stylefeng.guns.modular.adverse.controller;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.stylefeng.guns.common.annotion.Permission;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.persistence.model.AdverseReactionPhoto;
 import com.stylefeng.guns.config.properties.GunsProperties;
@@ -55,17 +58,19 @@ public class AdverseReactionPhotoController extends BaseController {
     /**
      * 获取指定治疗过程中不良反应记录（病人填表）id的图片附件列表
      */
+    @Permission
     @RequestMapping(value = "/list/{adverseReactionId}")
     @ResponseBody
     public Object list(@PathVariable("adverseReactionId") Integer adverseReactionId) {
         EntityWrapper<AdverseReactionPhoto> adverseReactionEntityWrapper = new EntityWrapper<AdverseReactionPhoto>();
-        adverseReactionEntityWrapper.eq("adverseReactionId", adverseReactionId);
+        adverseReactionEntityWrapper.eq("adverse_reaction_id", adverseReactionId);
         return adverseReactionPhotoService.selectList(adverseReactionEntityWrapper);
     }
 
     /**
      * 治疗过程中不良反应记录（病人填表）的图片附件详情
      */
+    @Permission
     @RequestMapping(value = "/detail/{adverseReactionPhotoId}")
     @ResponseBody
     public Object detail(@PathVariable("adverseReactionPhotoId") Integer adverseReactionPhotoId) {
@@ -75,6 +80,7 @@ public class AdverseReactionPhotoController extends BaseController {
     /**
      * 上传图片附件，并新增图片附件记录
      */
+    @Permission
     @ApiOperation("上传图片附件，并新增图片附件记录")
     @RequestMapping(method = RequestMethod.POST, path = "/upload/{adverseReactionId}")
     @ResponseBody
@@ -92,5 +98,32 @@ public class AdverseReactionPhotoController extends BaseController {
         adverseReactionPhotoService.insert(adverseReactionPhoto);
         int id=adverseReactionPhoto.getId();
         return new ErrorTip(200,id+"");
+    }
+
+    /**
+     * 下载某一条不良反应的附件
+     * @throws Exception
+     */
+    @Permission
+    @RequestMapping(value = "/exportOne/{adverseReactionId}")
+    @ResponseBody
+    public Tip exportOne(@PathVariable("adverseReactionId") Integer adverseReactionId) throws Exception {
+
+    	EntityWrapper<AdverseReactionPhoto> adverseReactionEntityWrapper = new EntityWrapper<AdverseReactionPhoto>();
+        adverseReactionEntityWrapper.eq("adverse_reaction_id", adverseReactionId);
+        List<AdverseReactionPhoto> photos=adverseReactionPhotoService.selectList(adverseReactionEntityWrapper);
+
+        if(photos.isEmpty()) {
+        	return new ErrorTip(404,adverseReactionId+"没有附件！");
+        }
+
+        String fileSavePath = gunsProperties.getFileUploadPath();
+
+        super.getHttpServletResponse().setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        super.getHttpServletResponse().setHeader("Content-Disposition", "attachment;filename=" + adverseReactionId+"_photo.zip");
+        //ByteArrayOutputStream bo, ZipOutputStream zos=new ZipOutputStream(bos),ResponseEntity<bos.toByteArray()>不成功，会出现下载的文件解压缩失败
+        ZipUtils.zipOut(super.getHttpServletResponse().getOutputStream(),fileSavePath, photos);
+		return SUCCESS_TIP;
+
     }
 }
