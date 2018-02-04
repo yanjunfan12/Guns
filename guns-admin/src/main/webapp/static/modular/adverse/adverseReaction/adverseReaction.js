@@ -14,9 +14,9 @@ var AdverseReaction = {
 AdverseReaction.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '主键id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '住院号', field: 'patientNumber', visible: true, align: 'center', valign: 'middle'},
-            {title: '姓名', field: 'name', visible: true, align: 'center', valign: 'middle'},
+            {title: '主键id', field: 'id', visible: true, align: 'center', valign: 'middle', sortable: true},
+            {title: '住院号', field: 'patientNumber', visible: true, align: 'center', valign: 'middle', sortable: true},
+            {title: '姓名', field: 'name', visible: true, align: 'center', valign: 'middle', sortable: true},
             {title: '放疗次数', field: 'radiotherapyCount', visible: true, align: 'center', valign: 'middle'},
             {title: '化疗次数', field: 'chemotherapyCount', visible: true, align: 'center', valign: 'middle'},
             {title: '体重', field: 'weight', visible: true, align: 'center', valign: 'middle'},
@@ -41,8 +41,8 @@ AdverseReaction.initColumn = function () {
             {title: '肺炎', field: 'pneumoniaStatusName', visible: true, align: 'center', valign: 'middle'},
             {title: '进食痛', field: 'esophagitisStatusName', visible: true, align: 'center', valign: 'middle'},
             {title: '其他症状', field: 'otherStatusesDesc', visible: true, align: 'center', valign: 'middle'},
-            {title: '填表日期', field: 'createtime', visible: true, align: 'center', valign: 'middle'},
-            {title: '修改日期', field: 'updatetime', visible: true, align: 'center', valign: 'middle'},
+            {title: '填表日期', field: 'createtime', visible: true, align: 'center', valign: 'middle', sortable: true},
+            {title: '修改日期', field: 'updatetime', visible: true, align: 'center', valign: 'middle', sortable: true},
     ];
 };
 
@@ -148,18 +148,29 @@ AdverseReaction.openAddAdverseReactionPhoto = function () {
 };
 
 /**
- * 查询不良反应记录列表
+ * 查询表单提交参数对象
+ * @returns {{}}
  */
-AdverseReaction.search = function () {
+AdverseReaction.formParams = function() {
     var queryData = {};
     queryData['name'] = $("#name").val();
     queryData['patientNumber'] = $("#patientNumber").val();
-    AdverseReaction.table.refresh({query: queryData});
+
+    return queryData;
+}
+
+/**
+ * 查询不良反应记录列表
+ */
+AdverseReaction.search = function () {
+
+    AdverseReaction.table.refresh({query: AdverseReaction.formParams()});
 };
 
 $(function () {
     var defaultColunms = AdverseReaction.initColumn();
     var table = new BSTable(AdverseReaction.id, "/adverseReaction/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
+    table.setQueryParams(AdverseReaction.formParams());
     AdverseReaction.table = table.init();
 });

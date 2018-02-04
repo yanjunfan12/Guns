@@ -34,7 +34,17 @@ public class GunsProperties {
 
     private Integer sessionValidationInterval = 15 * 60;  //session 验证失效时间（默认为15分钟 单位：秒）
 
-    public String getFileUploadPath() {
+    public Integer range=1000;
+
+    public Integer getRange() {
+		return range;
+	}
+
+	public void setRange(Integer range) {
+		this.range = range;
+	}
+
+	public String getFileUploadPath() {
         //如果没有写文件上传路径,保存到临时目录
         if (isEmpty(fileUploadPath)) {
             return getTempPath();

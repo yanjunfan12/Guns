@@ -12,11 +12,19 @@ import java.util.List;
  */
 public class PageInfoBT<T> {
 
-    // 结果集
+    /**
+     * 结果集
+     */
     private List<T> rows;
 
-    // 总数
+    /**
+     * 总数
+     */
     private long total;
+
+    public PageInfoBT() {
+
+    }
 
     public PageInfoBT(Page<T> page) {
         this.rows = page.getRecords();

@@ -16,7 +16,7 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 public class ExcelUtils {
 
 	/**
-	 *
+	 *  Excel表头中文到数据库字段名的映射
 	 */
 	public static final Map<String,String> TITLE_2_KEY=new LinkedHashMap<String,String>();
 	static {
@@ -45,7 +45,7 @@ public class ExcelUtils {
 		TITLE_2_KEY.put("头晕 ", "dizzyStatus");
 		TITLE_2_KEY.put("头痛  ", "headacheStatus");
 		TITLE_2_KEY.put("肺炎", "pneumoniaStatus");
-		TITLE_2_KEY.put("进食痛 （食管炎） ", "esophagitisStatus");
+		TITLE_2_KEY.put("进食痛", "esophagitisStatus");
 		TITLE_2_KEY.put("其他症状", "otherStatusesDesc");
 		TITLE_2_KEY.put("填表日期", "createtime");
 		TITLE_2_KEY.put("修改日期", "updatetime");
