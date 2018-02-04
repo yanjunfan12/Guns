@@ -1,24 +1,39 @@
 package com.stylefeng.guns.common.constant.factory;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
+
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.constant.cache.Cache;
 import com.stylefeng.guns.common.constant.cache.CacheKey;
 import com.stylefeng.guns.common.constant.state.ManagerStatus;
 import com.stylefeng.guns.common.constant.state.MenuStatus;
-import com.stylefeng.guns.common.persistence.dao.*;
-import com.stylefeng.guns.common.persistence.model.*;
+import com.stylefeng.guns.common.persistence.dao.DeptMapper;
+import com.stylefeng.guns.common.persistence.dao.DictMapper;
+import com.stylefeng.guns.common.persistence.dao.MenuMapper;
+import com.stylefeng.guns.common.persistence.dao.NoticeMapper;
+import com.stylefeng.guns.common.persistence.dao.RoleMapper;
+import com.stylefeng.guns.common.persistence.dao.UserMapper;
+import com.stylefeng.guns.common.persistence.model.Dept;
+import com.stylefeng.guns.common.persistence.model.Dict;
+import com.stylefeng.guns.common.persistence.model.Menu;
+import com.stylefeng.guns.common.persistence.model.Notice;
+import com.stylefeng.guns.common.persistence.model.Role;
+import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.support.StrKit;
 import com.stylefeng.guns.core.util.Convert;
 import com.stylefeng.guns.core.util.SpringContextHolder;
 import com.stylefeng.guns.core.util.ToolUtil;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.stylefeng.guns.modular.system.controller.DictUtil;
 
 /**
  * 常量的生产工厂
@@ -36,6 +51,8 @@ public class ConstantFactory implements IConstantFactory {
     private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
     private MenuMapper menuMapper = SpringContextHolder.getBean(MenuMapper.class);
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
+
+    private DictUtil dictUtil= SpringContextHolder.getBean(DictUtil.class);
 
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -222,26 +239,15 @@ public class ConstantFactory implements IConstantFactory {
     }
 
     /**
-     * 根据字典名称和字典中的值获取对应的名称
+     * 根据父节点字典名称和字典中的值获取对应的名称
      */
     @Override
-    @Cacheable(value = Cache.CONSTANT, key = "'" + CacheKey.DICT_PNAME_VAL + "'+#name+'_'+#val")
     public String getDictsByName(String name, Integer val) {
-        Dict temp = new Dict();
-        temp.setName(name);
-        Dict dict = dictMapper.selectOne(temp);
-        if (dict == null) {
+    	Map<Integer,Dict> map = DictUtil.me().getDictsOfParent(name);
+        if (map.isEmpty()||!map.containsKey(val)) {
             return "";
         } else {
-            Wrapper<Dict> wrapper = new EntityWrapper<>();
-            wrapper = wrapper.eq("pid", dict.getId());
-            List<Dict> dicts = dictMapper.selectList(wrapper);
-            for (Dict item : dicts) {
-                if (item.getNum() != null && item.getNum().equals(val)) {
-                    return item.getName();
-                }
-            }
-            return "";
+        	return map.get(val).getName();
         }
     }
 

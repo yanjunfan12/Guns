@@ -20,8 +20,8 @@ public interface CacheKey {
     String DEPT_NAME = "dept_name_";
 
     /**
-     * 根据字典名称和字典中的值获取对应的名称 缓存key开头标识
+     * 根据父节点名称parentName，找出其所有字典（字典编号为主键，字典为内容的Map） 缓存key开头标识
      */
-    String DICT_PNAME_VAL = "dict_pname_val_";
+    String DICT_PNAME = "dict_pname_";
 
 }
