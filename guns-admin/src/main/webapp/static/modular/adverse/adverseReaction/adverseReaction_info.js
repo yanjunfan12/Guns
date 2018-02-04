@@ -137,29 +137,8 @@ AdverseReactionInfoDlg.editSubmit = function() {
 $(function() {
 	Feng.initValidator("adverseReactionInfo", AdverseReactionInfoDlg.validateFields);
 
-    //初始化目前饮食选项
-    $("#dietaryStatus").val($("#dietaryStatusValue").val());
-
     //加载下拉菜单 index - 选择器的 index 位置 element - 当前的元素（也可使用 "this" 选择器）
-    $("select[loadData]").each(function(index,element){
-        var sel = $(element);
-        var defaultValue = sel.attr("defaultValue");//默认值
-        $.ajax({
-            url : Feng.ctxPath +"/dict/select2",
-            type : "post",
-            async : false,
-            dataType:"json",
-            data : {"parentName" : sel.attr("loadData")},
-            success : function(result){
-                for (var i=0; i<result.length; i++){
-                    if(defaultValue && defaultValue == result[i].text){
-                        sel.append("<option value="+result[i].id+" selected>"+result[i].text);
-                    }else{
-                        sel.append("<option value="+result[i].id+">"+result[i].text);
-                    }
-                }
-            }
-        });
-    });
+    var fanSelect2=new FanSelect2();
+    fanSelect2.init();
 
 });

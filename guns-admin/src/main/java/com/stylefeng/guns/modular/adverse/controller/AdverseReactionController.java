@@ -6,9 +6,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,6 +87,7 @@ public class AdverseReactionController extends BaseController {
     /**
      * 获取不良反应记录列表
      */
+    @Permission
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(@RequestParam(required = false) String name, @RequestParam(required = false) String patientNumber) {
@@ -106,6 +104,7 @@ public class AdverseReactionController extends BaseController {
     /**
      * 新增不良反应记录
      */
+    @Permission
     @ApiOperation("新增不良反应记录")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
@@ -122,6 +121,7 @@ public class AdverseReactionController extends BaseController {
     /**
      * 修改不良反应记录
      */
+    @Permission
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(AdverseReaction adverseReaction) {
@@ -132,6 +132,7 @@ public class AdverseReactionController extends BaseController {
     /**
      * 不良反应记录详情
      */
+    @Permission
     @RequestMapping(value = "/detail/{adverseReactionId}")
     @ResponseBody
     public Object detail(@PathVariable("adverseReactionId") Integer adverseReactionId) {

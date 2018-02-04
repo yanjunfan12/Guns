@@ -45,6 +45,7 @@ public class DictUtil {
 
 		Dict temp = new Dict();
 		temp.setName(parentName);
+		temp.setPid(0);//一级字典的父节点为根
 		Dict dict = dictMapper.selectOne(temp);
 		if (null!=dict) {
 		    Wrapper<Dict> wrapper = new EntityWrapper<>();

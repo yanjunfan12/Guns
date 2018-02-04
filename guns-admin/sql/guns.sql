@@ -60,6 +60,10 @@ CREATE TABLE `sys_dict` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='字典表';
 
+alter table `sys_dict` add constraint `name_pid_unique_key` unique (`name`,`pid`);
+
+--alter table `sys_dict` add constraint `num_pid_unique_key` unique (`num`,`pid`);
+
 -- ----------------------------
 -- Records of sys_dict
 -- ----------------------------

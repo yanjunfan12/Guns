@@ -4,7 +4,6 @@
         <div class="form-horizontal" id="adverseReactionInfo">
 
             <input type="hidden" id="id" value="${item.id}">
-			<input type="hidden" id="dietaryStatusValue" value="${item.dietaryStatus}">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
@@ -13,34 +12,29 @@
                             <#input id="radiotherapyCount" name="放疗次数" value="${item.radiotherapyCount}" underline="true"/>
                             <#input id="chemotherapyCount" name="化疗次数" value="${item.chemotherapyCount}" underline="true"/>
                             <#input id="weight" name="体重(单位kg)" value="${item.weight}" underline="true"/>
-                            <#select id="dietaryStatus" name="目前饮食" underline="true">
-								<option value="1">正常饮食</option>
-								<option value="2">半流质</option>
-							    <option value="3">流质</option>
-								<option value="4">完全梗阻</option>
-							</#select>
-                            <#input id="weakStatus" name="乏力 " value="${item.weakStatus}" underline="true"/>
-                            <#input id="nauseaStatus" name="恶心" value="${item.nauseaStatus}" underline="true"/>
-                            <#input id="vomitStatus" name="呕吐 " value="${item.vomitStatus}" underline="true"/>
-                            <#input id="diarrheaStatus" name="腹泻" value="${item.diarrheaStatus}" underline="true"/>
-                            <#input id="constipationStatus" name="便秘 " value="${item.constipationStatus}" underline="true"/>
-                            <#input id="muscleJointPainStatus" name="肌肉关节痛" value="${item.muscleJointPainStatus}" underline="true"/>
-                            <#input id="nervousSystemStatus" name="神经系统" value="${item.nervousSystemStatus}" underline="true"/>
-                            <#input id="alopeciaStatus" name="脱发" value="${item.alopeciaStatus}" underline="true"/>
-                            <#input id="feverStatus" name="发热" value="${item.feverStatus}" />
+                            <#select id="dietaryStatus" name="目前饮食" underline="true" defaultValue="${item.dietaryStatus}"/>
+                            <#select id="weakStatus" name="乏力" underline="true" defaultValue="${item.weakStatus}"/>
+                            <#select id="nauseaStatus" name="恶心" defaultValue="${item.nauseaStatus}" underline="true"/>
+                            <#select id="vomitStatus" name="呕吐 " defaultValue="${item.vomitStatus}" underline="true"/>
+                            <#select id="diarrheaStatus" name="腹泻" defaultValue="${item.diarrheaStatus}" underline="true"/>
+                            <#select id="constipationStatus" name="便秘 " defaultValue="${item.constipationStatus}" underline="true"/>
+                            <#select id="muscleJointPainStatus" name="肌肉关节痛" defaultValue="${item.muscleJointPainStatus}" underline="true"/>
+                            <#select id="nervousSystemStatus" name="神经系统" defaultValue="${item.nervousSystemStatus}" underline="true"/>
+                            <#select id="alopeciaStatus" name="脱发" defaultValue="${item.alopeciaStatus}" underline="true"/>
+                            <#select id="feverStatus" name="发热" defaultValue="${item.feverStatus}" />
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="coughStatus" name="咳嗽" value="${item.coughStatus}" underline="true"/>
-                            <#input id="skinStatus" name="放射性皮肤损伤" value="${item.skinStatus}" underline="true"/>
-                            <#input id="hiccupStatus" name="打嗝 " value="${item.hiccupStatus}" underline="true"/>
-                            <#input id="oralMucositisStatus" name="口腔黏膜炎" value="${item.oralMucositisStatus}" underline="true"/>
-                            <#input id="hoarsenessStatus" name="声嘶 " value="${item.hoarsenessStatus}" underline="true"/>
-                            <#input id="hearingStatus" name="听力损伤 " value="${item.hearingStatus}" underline="true"/>
-                            <#input id="dizzyStatus" name="头晕" value="${item.dizzyStatus}" underline="true"/>
-                            <#input id="headacheStatus" name="头痛" value="${item.headacheStatus}" underline="true"/>
-                            <#input id="pneumoniaStatus" name="肺炎" value="${item.pneumoniaStatus}" underline="true"/>
-                            <#input id="esophagitisStatus" name="进食痛 (食管炎)" value="${item.esophagitisStatus}" underline="true"/>
+                            <#select id="coughStatus" name="咳嗽" defaultValue="${item.coughStatus}" underline="true"/>
+                            <#select id="skinStatus" name="放射性皮肤损伤" defaultValue="${item.skinStatus}" underline="true"/>
+                            <#select id="hiccupStatus" name="打嗝 " defaultValue="${item.hiccupStatus}" underline="true"/>
+                            <#select id="oralMucositisStatus" name="口腔黏膜炎" defaultValue="${item.oralMucositisStatus}" underline="true"/>
+                            <#select id="hoarsenessStatus" name="声嘶 " defaultValue="${item.hoarsenessStatus}" underline="true"/>
+                            <#select id="hearingStatus" name="听力损伤 " defaultValue="${item.hearingStatus}" underline="true"/>
+                            <#select id="dizzyStatus" name="头晕" defaultValue="${item.dizzyStatus}" underline="true"/>
+                            <#select id="headacheStatus" name="头痛" defaultValue="${item.headacheStatus}" underline="true"/>
+                            <#select id="pneumoniaStatus" name="肺炎" defaultValue="${item.pneumoniaStatus}" underline="true"/>
+                            <#select id="esophagitisStatus" name="进食痛 (食管炎)" defaultValue="${item.esophagitisStatus}" underline="true"/>
                             <#input id="otherStatusesDesc" name="其他症状，请在下面详细描述：" value="${item.otherStatusesDesc}" underline="true"/>
                 </div>
             </div>
