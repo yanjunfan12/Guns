@@ -18,7 +18,7 @@
             <view class='form-group'>
                 <picker mode="selector" bindchange="bindPickerChangeDietaryStatusIndex" value="{{dietaryStatusIndex}}" range="{{dietaryStatusArray}}" range-key="{{'text'}}">
                     <view class="picker">
-                         当前选择：{{dietaryStatusArray[dietaryStatusIndex].text}}
+                    <input type="text" class="input-text" disabled="true" value="{{dietaryStatusArray[dietaryStatusIndex].text}}" placeholder="未选择" />
                     </view>
                     <input type="number" disabled="true" class="input-hidden" name="dietaryStatus" value="{{dietaryStatusArray[dietaryStatusIndex].id}}" />
                 </picker>
@@ -29,7 +29,7 @@
             <view class='form-group'>
                 <picker mode="selector" bindchange="bindPickerChangeWeakStatusIndex" value="{{weakStatusIndex}}" range="{{weakStatusArray}}" range-key="{{'text'}}">
                     <view class="picker">
-                         当前选择：{{weakStatusArray[weakStatusIndex].text}}
+                    <input type="text" class="input-text" disabled="true" value="{{weakStatusArray[weakStatusIndex].text}}" placeholder="未选择" />
                     </view>
                     <input type="number" disabled="true" class="input-hidden" name="weakStatus" value="{{weakStatusArray[weakStatusIndex].id}}" />
                 </picker>

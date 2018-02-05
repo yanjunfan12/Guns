@@ -54,9 +54,7 @@ Page({
     console.log(e);
     var formData = this.data.formData;
     console.log('formData为', JSON.stringify(formData));
-
     var that=this;
-
     wx.request({
       url: 'http://localhost/adverseReaction/add',
       data: formData,
