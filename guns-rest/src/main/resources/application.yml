@@ -1,6 +1,6 @@
 rest:
-  auth-open: true #jwt鉴权机制是否开启(true或者false)
-  sign-open: true #签名机制是否开启(true或false)
+  auth-open: false #jwt鉴权机制是否开启(true或者false)
+  sign-open: false #签名机制是否开启(true或false)
   swagger-open: true #是否开启swagger (true/false)
   file-upload-path: E:/gunPhoto  #文件上传目录(不配置的话为java.io.tmpdir目录)
 

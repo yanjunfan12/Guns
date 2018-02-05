@@ -1,0 +1,11 @@
+<!--pages/photo/photo.wxml-->
+<view id="photo">
+  <view  class="section btn-area">
+    <button type="default" bindtap="back" >返回</button> 
+    <button type="default" bindtap="gotoShow" >选择照片</button> 
+    <button type="default" bindtap="uploadPhoto" >点击上传</button> 
+  </view>
+  <view  class="section">
+    <image class= "show-image" mode="aspectFitf" src="{{src}}"></image>
+  </view>
+</view>

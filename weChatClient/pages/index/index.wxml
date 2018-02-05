@@ -1,13 +1,64 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view>
+<view id="add">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class="section">
+            <view class="section__title">姓名:</view>
+            <view class='form-group'>
+                <input type="text" class="input-text" name="name" placeholder="请输入姓名" />
+            </view>    
+        </view>
+        <view class="section">
+            <view class="section__title">住院号:</view>
+            <view class='form-group'>
+                <input type="text" class="input-text" name="patientNumber" placeholder="请输入住院号" />
+            </view>    
+        </view>
+        <view class="section">
+            <view class="section__title">目前饮食:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangeDietaryStatusIndex" value="{{dietaryStatusIndex}}" range="{{dietaryStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                         当前选择：{{dietaryStatusArray[dietaryStatusIndex].text}}
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="dietaryStatus" value="{{dietaryStatusArray[dietaryStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">乏力:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangeWeakStatusIndex" value="{{weakStatusIndex}}" range="{{weakStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                         当前选择：{{weakStatusArray[weakStatusIndex].text}}
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="weakStatus" value="{{weakStatusArray[weakStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+          <view class="section__title">其他症状:</view>
+          <view class='form-group'>
+            <textarea name="otherStatusesDesc" bindblur="bindTextAreaBlur" auto-height placeholder="请详细描述其他症状" />
+          </view>
+        </view>
+        <view class="section btn-area">
+            <button formType="submit">提交</button>
+            <button formType="reset">清空</button>
+        </view>
+    </form>
+
+     <!-- 黑框提示并消失 -->
+    <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">
+        {{notice_str}}
+    </toast>
+    <!-- 确认框 及 提示框 -->
+    <view class="page__bd">
+        <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">
+            确认提交么？
+        </modal>
+        <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
+            <view> 提示 </view>
+            <view> 清空成功 </view>
+        </modal>
+    </view>
+</view>    

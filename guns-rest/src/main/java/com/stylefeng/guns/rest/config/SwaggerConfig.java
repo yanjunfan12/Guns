@@ -38,14 +38,20 @@ public class SwaggerConfig{
     @Autowired
     private JwtProperties jwtProperties;
 
+    @Autowired
+    private RestProperties restProperties;
+
     @Bean
     public Docket createRestApi() {
 
-    	//添加全局head参数,将jwt的token放在head里
-    	ParameterBuilder tokenPar = new ParameterBuilder();
     	List<Parameter> pars = new ArrayList<Parameter>();
-    	tokenPar.name(jwtProperties.getHeader()).description("jwt token令牌").modelRef(new ModelRef("string")).parameterType("header").required(true).build();
-    	pars.add(tokenPar.build());
+
+    	if(restProperties.isAuthOpen()) {//jwt鉴权机制开启
+	    	//添加全局head参数,将jwt的token放在head里
+	    	ParameterBuilder tokenPar = new ParameterBuilder();
+	    	tokenPar.name(jwtProperties.getHeader()).description("jwt token令牌").modelRef(new ModelRef("string")).parameterType("header").required(true).build();
+	    	pars.add(tokenPar.build());
+    	}
 
         return new Docket(DocumentationType.SWAGGER_2)
         		.globalOperationParameters(pars)
