@@ -69,7 +69,7 @@ AdverseReactionPhotoInfoDlg.collectData = function() {
 
 $(function() {
 
-	var uploadUrl='/adverseReactionPhoto/upload/'+$("#adverseReactionId").val();
+	var uploadUrl='/rest/adverseReactionPhoto/upload/'+$("#adverseReactionId").val();
 	Feng.log('uploadUrl'+uploadUrl);
 
     // 初始化附件图片上传

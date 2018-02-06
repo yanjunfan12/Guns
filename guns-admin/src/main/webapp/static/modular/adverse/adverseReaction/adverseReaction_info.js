@@ -8,6 +8,7 @@ var AdverseReactionInfoDlg = {
 	        validators: {
 	            notEmpty: {
 	                message: '姓名不能为空'
+
 	            }
 	        }
 	    },
@@ -100,7 +101,7 @@ AdverseReactionInfoDlg.addSubmit = function() {
     this.collectData();
 
     //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/adverseReaction/add", function(data){
+    var ajax = new $ax(Feng.ctxPath + "/rest/adverseReaction/add", function(data){
         Feng.success("添加成功!");
         window.parent.AdverseReaction.table.refresh();
         AdverseReactionInfoDlg.close();

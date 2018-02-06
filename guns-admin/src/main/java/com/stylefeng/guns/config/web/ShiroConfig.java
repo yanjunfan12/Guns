@@ -152,7 +152,15 @@ public class ShiroConfig {
         hashMap.put("/login", "anon");
         hashMap.put("/global/sessionError", "anon");
         hashMap.put("/kaptcha", "anon");
-        hashMap.put("/**", "user");
+        hashMap.put("/rest/**", "anon");//接口不需要认证,一个通配符*不行，要两个**
+        hashMap.put("/swagger-ui.html", "anon");//swagger不需要认证
+        hashMap.put("/webjars/**", "anon");//swagger不需要认证
+        hashMap.put("/swagger-resources/**", "anon");//swagger不需要认证
+        hashMap.put("/swagger-resources", "anon");//swagger不需要认证
+        hashMap.put("/v2/api-docs/**", "anon");//swagger不需要认证
+        hashMap.put("/v2/api-docs", "anon");//swagger不需要认证
+//        hashMap.put("/webjars/springfox-swagger-ui/*", "anon");//swagger不需要认证
+		hashMap.put("/**", "user");
         shiroFilter.setFilterChainDefinitionMap(hashMap);
         return shiroFilter;
     }
