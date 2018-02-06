@@ -12,9 +12,9 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value="结果返回数据对象Tip",description="结果返回数据对象")
 public abstract class Tip {
 
-	@ApiModelProperty(value="返回码，200成功，其他失败")
+	@ApiModelProperty(value="返回码，200成功，其他失败",required=true)
     protected int code;
-	@ApiModelProperty(value="返回信息")
+	@ApiModelProperty(value="返回信息",required=true)
     protected String message;
 
     public int getCode() {

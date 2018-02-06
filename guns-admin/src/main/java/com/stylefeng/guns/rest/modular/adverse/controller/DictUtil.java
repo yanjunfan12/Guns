@@ -1,9 +1,10 @@
-package com.stylefeng.guns.modular.system.controller;
+package com.stylefeng.guns.rest.modular.adverse.controller;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.cache.annotation.Cacheable;
@@ -34,14 +35,18 @@ public class DictUtil {
 	 *
 	 * 根据父节点名称parentName，找出其所有字典（字典编号为主键，字典为内容的Map）
 	 *
-	 * @param parentName
+	 * @param parentName 父节点名称,trim后有效。
 	 * @return
 	 */
 	 @Cacheable(value = Cache.DICT, key = "'" + CacheKey.DICT_PNAME + "'+#parentName")
 	 public Map<Integer,Dict> getDictsOfParent(String parentName){
 		log.info("根据父节点名称parentName，找出其所有字典（字典编号为主键，字典为内容的Map）,parentName="+parentName);
-
 		Map<Integer,Dict> results=new HashMap<Integer,Dict>();
+		if(StringUtils.isBlank(parentName)) {
+			return results;
+		}
+
+		parentName=parentName.trim();
 
 		Dict temp = new Dict();
 		temp.setName(parentName);
@@ -53,6 +58,8 @@ public class DictUtil {
 		    List<Dict> dicts = dictMapper.selectList(wrapper);
 		    for(Dict d:dicts) {
 		    	int num=d.getNum();//字典编号
+		    	String nameTrim=null!=d.getName()?d.getName().trim():null;
+		    	d.setName(nameTrim);
 		    	results.put(num, d);
 		    }
 		}else {

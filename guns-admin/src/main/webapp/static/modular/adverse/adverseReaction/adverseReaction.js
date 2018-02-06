@@ -34,7 +34,7 @@ AdverseReaction.initColumn = function () {
             {title: '放射性皮肤损伤', field: 'skinStatusName', visible: true, align: 'center', valign: 'middle'},
             {title: '打嗝', field: 'hiccupStatusName', visible: true, align: 'center', valign: 'middle'},
             {title: '口腔黏膜炎', field: 'oralMucositisStatusName', visible: true, align: 'center', valign: 'middle'},
-            {title: '声嘶 ', field: 'hoarsenessStatusName', visible: true, align: 'center', valign: 'middle'},
+            {title: '声嘶', field: 'hoarsenessStatusName', visible: true, align: 'center', valign: 'middle'},
             {title: '听力损伤', field: 'hearingStatusName', visible: true, align: 'center', valign: 'middle'},
             {title: '头晕', field: 'dizzyStatusName', visible: true, align: 'center', valign: 'middle'},
             {title: '头痛', field: 'headacheStatusName', visible: true, align: 'center', valign: 'middle'},

@@ -1,16 +1,16 @@
 /**
  *
  * 下拉框中有loadData属性的
- * select2 的封装
+ * selectOptions封装
  *
  * @author fanyj
  */
 (function () {
-    var FanSelect2 = function () {
-        this.url = Feng.ctxPath +"/dict/select2";
+    var FanSelectOptions = function () {
+        this.url = Feng.ctxPath +"/rest/dict/selectOptions";
     };
 
-    FanSelect2.prototype = {
+    FanSelectOptions.prototype = {
 
         /**
          * 初始化bootstrap table
@@ -24,7 +24,7 @@
     	        var defaultValue = sel.attr("defaultValue");//默认值
     	        $.ajax({
     	            url : me.url,
-    	            type : "post",
+    	            type : "get",
     	            async : false,
     	            dataType:"json",
     	            data : { "parentName" : sel.attr("loadData")},
@@ -44,6 +44,6 @@
         },
     };
 
-    window.FanSelect2 = FanSelect2;
+    window.FanSelectOptions = FanSelectOptions;
 
 }());

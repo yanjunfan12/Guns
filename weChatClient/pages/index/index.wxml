@@ -1,5 +1,8 @@
 <!--index.wxml-->
 <view id="add">
+    <view class="section btn-area">
+        <button type="default" bindtap="refreshSelectOptions">刷新选项</button>
+    </view>
     <form bindsubmit="formSubmit" bindreset="formReset">
         <view class="section">
             <view class="section__title">姓名:</view>
@@ -10,7 +13,25 @@
         <view class="section">
             <view class="section__title">住院号:</view>
             <view class='form-group'>
-                <input type="text" class="input-text" name="patientNumber" placeholder="请输入住院号" />
+                <input type="number" class="input-text" name="patientNumber" placeholder="请输入住院号" />
+            </view>    
+        </view>
+        <view class="section">
+            <view class="section__title">放疗次数:</view>
+            <view class='form-group'>
+                <input type="number" class="input-text" name="radiotherapyCount" placeholder="请输入放疗次数" />
+            </view>    
+        </view>
+        <view class="section">
+            <view class="section__title">化疗次数:</view>
+            <view class='form-group'>
+                <input type="number" class="input-text" name="chemotherapyCount" placeholder="请输入化疗次数" />
+            </view>    
+        </view>
+        <view class="section">
+            <view class="section__title">体重:</view>
+            <view class='form-group'>
+                <input type="digit" class="input-text" name="weight" placeholder="请输入体重" />
             </view>    
         </view>
         <view class="section">
@@ -35,6 +56,203 @@
                 </picker>
             </view>
         </view>
+        <view class="section">
+            <view class="section__title">恶心:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangenauseaStatusIndex" value="{{nauseaStatusIndex}}" range="{{nauseaStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{nauseaStatusArray[nauseaStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="nauseaStatus" value="{{nauseaStatusArray[nauseaStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">呕吐:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangevomitStatusIndex" value="{{vomitStatusIndex}}" range="{{vomitStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{vomitStatusArray[vomitStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="vomitStatus" value="{{vomitStatusArray[vomitStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">腹泻:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangediarrheaStatusIndex" value="{{diarrheaStatusIndex}}" range="{{diarrheaStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{diarrheaStatusArray[diarrheaStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="diarrheaStatus" value="{{diarrheaStatusArray[diarrheaStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">便秘:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangeconstipationStatusIndex" value="{{constipationStatusIndex}}" range="{{constipationStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{constipationStatusArray[constipationStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="constipationStatus" value="{{constipationStatusArray[constipationStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">肌肉关节痛:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangemuscleJointPainStatusIndex" value="{{muscleJointPainStatusIndex}}" range="{{muscleJointPainStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{muscleJointPainStatusArray[muscleJointPainStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="muscleJointPainStatus" value="{{muscleJointPainStatusArray[muscleJointPainStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">神经系统:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangenervousSystemStatusIndex" value="{{nervousSystemStatusIndex}}" range="{{nervousSystemStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{nervousSystemStatusArray[nervousSystemStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="nervousSystemStatus" value="{{nervousSystemStatusArray[nervousSystemStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">脱发:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangealopeciaStatusIndex" value="{{alopeciaStatusIndex}}" range="{{alopeciaStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{alopeciaStatusArray[alopeciaStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="alopeciaStatus" value="{{alopeciaStatusArray[alopeciaStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">发热:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangefeverStatusIndex" value="{{feverStatusIndex}}" range="{{feverStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{feverStatusArray[feverStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="feverStatus" value="{{feverStatusArray[feverStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">咳嗽:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangecoughStatusIndex" value="{{coughStatusIndex}}" range="{{coughStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{coughStatusArray[coughStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="coughStatus" value="{{coughStatusArray[coughStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">放射性皮肤损伤:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangeskinStatusIndex" value="{{skinStatusIndex}}" range="{{skinStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{skinStatusArray[skinStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="skinStatus" value="{{skinStatusArray[skinStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>                                                                                <view class="section">
+            <view class="section__title">打嗝:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangehiccupStatusIndex" value="{{hiccupStatusIndex}}" range="{{hiccupStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{hiccupStatusArray[hiccupStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="hiccupStatus" value="{{hiccupStatusArray[hiccupStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">口腔黏膜炎:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangeoralMucositisStatusIndex" value="{{oralMucositisStatusIndex}}" range="{{oralMucositisStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{oralMucositisStatusArray[oralMucositisStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="oralMucositisStatus" value="{{oralMucositisStatusArray[oralMucositisStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">声嘶:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangehoarsenessStatusIndex" value="{{hoarsenessStatusIndex}}" range="{{hoarsenessStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{hoarsenessStatusArray[hoarsenessStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="hoarsenessStatus" value="{{hoarsenessStatusArray[hoarsenessStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">听力损伤:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangehearingStatusIndex" value="{{hearingStatusIndex}}" range="{{hearingStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{hearingStatusArray[hearingStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="hearingStatus" value="{{hearingStatusArray[hearingStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">头晕:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangedizzyStatusIndex" value="{{dizzyStatusIndex}}" range="{{dizzyStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{dizzyStatusArray[dizzyStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="dizzyStatus" value="{{dizzyStatusArray[dizzyStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>       
+        <view class="section">
+            <view class="section__title">头痛:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangeheadacheStatusIndex" value="{{headacheStatusIndex}}" range="{{headacheStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{headacheStatusArray[headacheStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="headacheStatus" value="{{headacheStatusArray[headacheStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>  
+        <view class="section">
+            <view class="section__title">肺炎:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangepneumoniaStatusIndex" value="{{pneumoniaStatusIndex}}" range="{{pneumoniaStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{pneumoniaStatusArray[pneumoniaStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="pneumoniaStatus" value="{{pneumoniaStatusArray[pneumoniaStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="section__title">进食痛:</view>
+            <view class='form-group'>
+                <picker mode="selector" bindchange="bindPickerChangeesophagitisStatusIndex" value="{{esophagitisStatusIndex}}" range="{{esophagitisStatusArray}}" range-key="{{'text'}}">
+                    <view class="picker">
+                    <input type="text" class="input-text" disabled="true" value="{{esophagitisStatusArray[esophagitisStatusIndex].text}}" placeholder="未选择" />
+                    </view>
+                    <input type="number" disabled="true" class="input-hidden" name="esophagitisStatus" value="{{esophagitisStatusArray[esophagitisStatusIndex].id}}" />
+                </picker>
+            </view>
+        </view>                       
         <view class="section">
           <view class="section__title">其他症状:</view>
           <view class='form-group'>

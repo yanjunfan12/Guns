@@ -1,6 +1,5 @@
 package com.stylefeng.guns.modular.system.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -57,9 +56,6 @@ public class DictController extends BaseController {
 
     @Resource
     IDictService dictService;
-
-    @Resource
-    DictUtil dictUtil;
 
     /**
      * 跳转到字典管理首页
@@ -161,36 +157,6 @@ public class DictController extends BaseController {
 
         this.dictService.delteDict(dictId);
         return SUCCESS_TIP;
-    }
-
-    /**
-     *
-     * 获得parentName下拉框select2的数据字典
-     *
-     * @param parentName
-     * @return
-     */
-    @RequestMapping(value = "/select2")
-    @ResponseBody
-    public List<Option> dict4Select2(@RequestParam String parentName) {
-
-    	log.info("获得parentName下拉框select2的数据字典,parentName="+parentName);
-
-    	List<Option> results=new ArrayList<Option>();
-
-    	Map<Integer,Dict> map = DictUtil.me().getDictsOfParent(parentName);
-        if (!map.isEmpty()) {
-            for(int num:map.keySet()) {
-            	Option o=new Option();
-            	o.setId(num);//字典编号
-            	o.setText(map.get(num).getName());//字典中文值
-            	results.add(o);
-            }
-        }else {
-        	log.warn(parentName+"没有数据字典");
-        }
-
-        return results;
     }
 
 }

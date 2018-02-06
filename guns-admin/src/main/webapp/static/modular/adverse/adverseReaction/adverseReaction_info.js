@@ -138,8 +138,8 @@ AdverseReactionInfoDlg.editSubmit = function() {
 $(function() {
 	Feng.initValidator("adverseReactionInfo", AdverseReactionInfoDlg.validateFields);
 
-    //加载下拉菜单 index - 选择器的 index 位置 element - 当前的元素（也可使用 "this" 选择器）
-    var fanSelect2=new FanSelect2();
-    fanSelect2.init();
+	//下拉框中有loadData属性的selectOptions封装
+    var fanSelectOptions=new FanSelectOptions();
+    fanSelectOptions.init();
 
 });

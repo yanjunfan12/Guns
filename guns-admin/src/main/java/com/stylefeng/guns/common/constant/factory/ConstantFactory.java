@@ -33,7 +33,7 @@ import com.stylefeng.guns.core.support.StrKit;
 import com.stylefeng.guns.core.util.Convert;
 import com.stylefeng.guns.core.util.SpringContextHolder;
 import com.stylefeng.guns.core.util.ToolUtil;
-import com.stylefeng.guns.modular.system.controller.DictUtil;
+import com.stylefeng.guns.rest.modular.adverse.controller.DictUtil;
 
 /**
  * 常量的生产工厂
