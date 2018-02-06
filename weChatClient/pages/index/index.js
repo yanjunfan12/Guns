@@ -56,7 +56,7 @@ Page({
     console.log('formData为', JSON.stringify(formData));
     var that=this;
     wx.request({
-      url: 'http://localhost/adverseReaction/add',
+      url: 'http://192.168.1.106:8080/rest/adverseReaction/add',
       data: formData,
       method: 'POST',
       header: {
@@ -67,7 +67,7 @@ Page({
         that.setData({
           modalHidden: true,
           toast1Hidden: false,
-          notice_str: '提交成功',
+          notice_str: '提交成功，跳转...',
           formData: {}
         });
         var theUrl = '/pages/photo/photo?id=' + res.data.message;

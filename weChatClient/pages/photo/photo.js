@@ -6,7 +6,7 @@ Page({
    */
   data: {
     id: -1,
-    src: ""
+    src: []
   },
   back: function() {
     wx.navigateBack({
@@ -43,16 +43,26 @@ Page({
   uploadPhoto: function () {
     var that = this;
     var theId = this.data.id;
-    var theUrl = 'http://localhost/adverseReactionPhoto/upload/'+theId;
+    var theUrl = 'http://192.168.1.106:8080/rest/adverseReactionPhoto/upload/'+theId;
     console.log("theUrl=" + theUrl);
-    console.log("that.data.src[0]=" + that.data.src[0]);
+    var theSrc = that.data.src;
+    console.log("theSrc=" + JSON.stringify(theSrc));
+    if (theSrc.length<1){
+      console.warn("未选择图片");
+      wx.showToast({
+        title: '未选择图片',
+        icon: 'fail',
+        duration: 2000
+      });
+      return;
+    }
 
     wx.uploadFile({
       url: theUrl, //仅为示例 
-      filePath: that.data.src[0],
+      filePath: theSrc[0],
       name: 'file',
       success: function (res) {        
-        console.log(res);
+        console.log("上传成功返回：" + JSON.stringify(res));
         var obj = JSON.parse(res.data);
         var resule = obj.code;
         var msg = obj.message;
@@ -68,10 +78,7 @@ Page({
             content: '上传成功，确定则继续上传；取消则返回上一页。',
             success: function (res) {
               if (res.confirm) {
-                console.log('用户点击确定');
-                that.setData({
-                  src: ""
-                });
+                console.log('用户点击确定');               
               } else if (res.cancel) {
                 console.log('用户点击取消');
                 wx.navigateBack({
@@ -81,6 +88,19 @@ Page({
             }
           })
         }
+      },
+      fail: function () {
+        console.log("uploadFile fail");
+        wx.showToast({
+          title: "上传失败，请重新上传",
+          icon: 'fail',
+          duration: 2000
+        })
+      },
+      complete:function(){//无论成功失败，清空之前选择的图片
+        that.setData({
+          src: []
+        });
       }
     })
   },
