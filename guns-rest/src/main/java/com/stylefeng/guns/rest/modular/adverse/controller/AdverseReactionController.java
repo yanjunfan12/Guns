@@ -36,7 +36,12 @@ public class AdverseReactionController extends BaseController {
     	if(null==adverseReaction)
     		return new ErrorTip(301,"操作失败，入参为null");
 
-        adverseReactionService.insert(adverseReaction);
+    	adverseReaction.setId(null);//主键ID不能接口输入设定，而是数据库自增
+    	adverseReaction.setCreatetime(null);//创建时间不能接口输入设定，而是数据库自动设定
+    	adverseReaction.setUpdatetime(null);//更新时间不能接口输入设定，而是数据库自动设定
+    	adverseReaction.setVersion(null);//乐观锁保留字段不能接口输入设定
+
+    	adverseReactionService.insert(adverseReaction);
 
         int id=adverseReaction.getId();
         return new ErrorTip(200,id+"");
