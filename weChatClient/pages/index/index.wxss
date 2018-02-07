@@ -12,11 +12,14 @@
 }  
 .section{  
     clear: both;  
-    width:90%;  
+    width: 90%;  
     margin: 2rem auto;  
 }  
 .input-text{  
+    padding: 5px; 
     border: 1px solid #ddd;  
+    width: 100%;  
+    background-color: #FFFFFF;  
 }  
 .input-hidden{
     width:0%;  
@@ -27,6 +30,14 @@
     border-radius: 2px;  
 }  
 .picker{  
-    padding: 13px;  
+    padding: 0px;  
     background-color: #FFFFFF;  
+    width: 100%;  
 }  
+.textAera{  
+    padding: 5px;  
+    float: left;  
+    width: 100%;  
+    border: 1px solid #ddd;  
+    background-color: #FFFFFF;  
+} 

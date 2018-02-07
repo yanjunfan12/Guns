@@ -29,7 +29,7 @@ CREATE TABLE `tbl_adverse_reaction` (
   `Dizzy_status` int(11) DEFAULT NULL COMMENT '头晕  ○ 0 无  ○ 1 轻微，无须处理   ○ 2 影响日常生活   ○ 3 生活无法自理 ',
   `headache_status` int(11) DEFAULT NULL COMMENT '头痛  ○ 0 无  ○ 1 轻微，无须处理   ○ 2 影响日常生活   ○ 3 生活无法自理 ',
   `pneumonia_status` int(11) DEFAULT NULL COMMENT '肺炎 ○ 0 无  ○ 1 轻度干咳，无需处理或仅需口服药 ○ 2 持续性咳嗽需静脉用药（激素）  ○ 3 止咳药无作用或休息时呼吸困难、需吸氧        ○ 4 需呼吸机 ',
-  `Esophagitis_status` int(11) DEFAULT NULL COMMENT '进食痛 （食管炎） ○ 0 无  ○ 1 疼痛轻微，无须处理或仅需口服药  ○ 2 疼痛中等，需静脉输液治疗  ○ 3 疼痛严重，需鼻饲（经管道进食）或肠外营养    ○ 4 食管穿孔 ',
+  `Esophagitis_status` int(11) DEFAULT NULL COMMENT '进食痛   ○ 0 无  ○ 1 疼痛轻微，无须处理或仅需口服药  ○ 2 疼痛中等，需静脉输液治疗  ○ 3 疼痛严重，需鼻饲（经管道进食）或肠外营养    ○ 4 食管穿孔 ',
   `other_statuses_desc` varchar(1000) DEFAULT NULL COMMENT '其他症状，请在下面详细描述：',
 
   `createtime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '填表日期',

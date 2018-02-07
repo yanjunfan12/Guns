@@ -46,9 +46,9 @@ public class ExcelUtils {
 		TITLE_2_KEY.put("头痛  ", "headacheStatusName");
 		TITLE_2_KEY.put("肺炎", "pneumoniaStatusName");
 		TITLE_2_KEY.put("进食痛", "esophagitisStatusName");
-		TITLE_2_KEY.put("其他症状", "otherStatusesDescName");
-		TITLE_2_KEY.put("填表日期", "createtimeName");
-		TITLE_2_KEY.put("修改日期", "updatetimeName");
+		TITLE_2_KEY.put("其他症状", "otherStatusesDesc");
+		TITLE_2_KEY.put("填表日期", "createtime");
+		TITLE_2_KEY.put("修改日期", "updatetime");
 
 	}
 

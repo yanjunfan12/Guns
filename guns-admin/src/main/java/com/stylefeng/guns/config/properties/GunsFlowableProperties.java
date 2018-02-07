@@ -17,7 +17,7 @@ public class GunsFlowableProperties {
     public static final String GUNS_FLOWABLE_DATASOURCE = "guns.flowable.datasource";
 
     //默认多数据源的链接
-    private String url = "jdbc:mysql://127.0.0.1:3306/guns_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
+    private String url = "jdbc:mysql://127.0.0.1:3306/guns_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL";
 
     //默认多数据源的数据库账号
     private String username = "root";

@@ -99,4 +99,19 @@ public class LogTaskFactory {
             }
         };
     }
+
+    public static TimerTask exceptionLog(final Integer userId, final String msg) {
+        return new TimerTask() {
+            @Override
+            public void run() {
+                OperationLog operationLog = LogFactory.createOperationLog(
+                        LogType.EXCEPTION, userId, "", null, null, msg, LogSucceed.FAIL);
+                try {
+                    operationLogMapper.insert(operationLog);
+                } catch (Exception e) {
+                    logger.error("创建异常日志异常!", e);
+                }
+            }
+        };
+    }
 }

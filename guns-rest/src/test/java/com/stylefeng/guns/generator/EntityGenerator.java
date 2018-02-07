@@ -48,7 +48,7 @@ public class EntityGenerator {
                 return super.processTypeConvert(fieldType);
             }
         });
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");
         dsc.setUrl("jdbc:mysql://127.0.0.1:3306/rest?characterEncoding=utf8");

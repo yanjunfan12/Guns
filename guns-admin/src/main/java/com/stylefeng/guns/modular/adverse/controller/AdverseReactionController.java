@@ -2,10 +2,14 @@ package com.stylefeng.guns.modular.adverse.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -14,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +32,7 @@ import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.persistence.model.AdverseReaction;
 import com.stylefeng.guns.config.properties.GunsProperties;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.page.PageInfoBT;
 import com.stylefeng.guns.modular.adverse.service.IAdverseReactionService;
@@ -38,6 +44,7 @@ import com.stylefeng.guns.modular.adverse.warpper.AdverseReactionWarpper;
  * @author fanyj
  * @Date 2018-01-26 20:06:23
  */
+@Validated
 @Controller
 @RequestMapping("/adverseReaction")
 public class AdverseReactionController extends BaseController {
@@ -123,9 +130,17 @@ public class AdverseReactionController extends BaseController {
     @Permission
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Object update(AdverseReaction adverseReaction) {
-        adverseReactionService.updateById(adverseReaction);
-        return super.SUCCESS_TIP;
+    public Object update(
+    		@Valid
+    		@NotNull(message="不良反应记录入参不能为null")
+    		AdverseReaction adverseReaction) {
+
+        boolean flag=adverseReactionService.updateById(adverseReaction);
+        if(flag)
+        	return super.SUCCESS_TIP;
+        else{
+        	return new ErrorTip(404,"修改不良反应记录失败，ID="+adverseReaction.getId());
+        }
     }
 
     /**
@@ -134,7 +149,9 @@ public class AdverseReactionController extends BaseController {
     @Permission
     @RequestMapping(value = "/detail/{adverseReactionId}")
     @ResponseBody
-    public Object detail(@PathVariable("adverseReactionId") Integer adverseReactionId) {
+    public Object detail(
+    		@NotNull(message="不良反应记录ID入参不能为null")
+    		@PathVariable("adverseReactionId") Integer adverseReactionId) {
         return adverseReactionService.selectById(adverseReactionId);
     }
 
@@ -150,6 +167,9 @@ public class AdverseReactionController extends BaseController {
         	adverseReactionEntityWrapper.like("name", name,SqlLike.RIGHT);
         if(!StringUtils.isBlank(patientNumber))
         	adverseReactionEntityWrapper.eq("patient_number", patientNumber);
+        String[] colArray={"createtime"};
+        Collection<String> cols=Arrays.asList(colArray);
+		adverseReactionEntityWrapper.orderDesc(cols);
 
         List<Map<String, Object>> list=selectPage(adverseReactionEntityWrapper);
         byte[] bytes=ExcelUtils.buildBytes(list);

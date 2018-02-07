@@ -8,4 +8,12 @@
   <view  class="section">
     <image class= "show-image" mode="aspectFitf" src="{{src}}"></image>
   </view>
+
+  <!-- 确认框 及 提示框 -->
+  <view class="page__bd">
+      <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
+          <view> 提示 </view>
+          <view> {{hints}} </view>
+      </modal>
+  </view>
 </view>

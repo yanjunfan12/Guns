@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,7 @@ import io.swagger.annotations.ApiParam;
  * @author fanyj
  * @Date 2018年2月6日 12:55:31
  */
+@Validated
 @Controller
 @RequestMapping("/rest/dict")
 public class RestDictController extends BaseController {
@@ -46,7 +48,10 @@ public class RestDictController extends BaseController {
     @ApiOperation("根据父节点字典名称，获得下拉框select option的数据字典")
     @RequestMapping(method = RequestMethod.GET,value = "/selectOptions")
     @ResponseBody
-    public List<Option> dict4Select2(@ApiParam(value = "父节点字典名称", required = true)@RequestParam String parentName) {
+    public List<Option> dict4Select2(
+    		@ApiParam(value = "父节点字典名称", required = true)
+    		@RequestParam
+    		String parentName) {
 
     	log.info("获得parentName下拉框select2的数据字典,parentName="+parentName);
 

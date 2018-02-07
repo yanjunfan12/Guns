@@ -256,7 +256,7 @@
         <view class="section">
           <view class="section__title">其他症状:</view>
           <view class='form-group'>
-            <textarea name="otherStatusesDesc" bindblur="bindTextAreaBlur" auto-height placeholder="请详细描述其他症状" />
+            <textarea name="otherStatusesDesc" class="textAera" auto-height="true" placeholder="请详细描述其他症状" maxlength="999" />
           </view>
         </view>
         <view class="section btn-area">
@@ -276,7 +276,7 @@
         </modal>
         <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
             <view> 提示 </view>
-            <view> 清空成功 </view>
+            <view> {{hints}} </view>
         </modal>
     </view>
 </view>    

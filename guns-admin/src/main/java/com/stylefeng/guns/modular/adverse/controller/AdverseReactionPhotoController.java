@@ -7,18 +7,22 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.Permission;
+import com.stylefeng.guns.common.persistence.model.AdverseReaction;
 import com.stylefeng.guns.common.persistence.model.AdverseReactionPhoto;
 import com.stylefeng.guns.config.properties.GunsProperties;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.base.tips.Tip;
 import com.stylefeng.guns.modular.adverse.service.IAdverseReactionPhotoService;
+import com.stylefeng.guns.modular.adverse.service.IAdverseReactionService;
 
 /**
  * 治疗过程中不良反应记录（病人填表）的图片附件控制器
@@ -26,6 +30,7 @@ import com.stylefeng.guns.modular.adverse.service.IAdverseReactionPhotoService;
  * @author fengshuonan
  * @Date 2018-01-27 21:06:51
  */
+@Validated
 @Controller
 @RequestMapping("/adverseReactionPhoto")
 public class AdverseReactionPhotoController extends BaseController {
@@ -38,34 +43,15 @@ public class AdverseReactionPhotoController extends BaseController {
     @Autowired
     private IAdverseReactionPhotoService adverseReactionPhotoService;
 
+    @Autowired
+    private IAdverseReactionService adverseReactionService;
+
     /**
      * 跳转到治疗过程中不良反应记录（病人填表）的图片附件首页
      */
     @RequestMapping("")
     public String index() {
         return PREFIX + "adverseReactionPhoto.html";
-    }
-
-    /**
-     * 获取指定治疗过程中不良反应记录（病人填表）id的图片附件列表
-     */
-    @Permission
-    @RequestMapping(value = "/list/{adverseReactionId}")
-    @ResponseBody
-    public Object list(@PathVariable("adverseReactionId") Integer adverseReactionId) {
-        EntityWrapper<AdverseReactionPhoto> adverseReactionEntityWrapper = new EntityWrapper<AdverseReactionPhoto>();
-        adverseReactionEntityWrapper.eq("adverse_reaction_id", adverseReactionId);
-        return adverseReactionPhotoService.selectList(adverseReactionEntityWrapper);
-    }
-
-    /**
-     * 治疗过程中不良反应记录（病人填表）的图片附件详情
-     */
-    @Permission
-    @RequestMapping(value = "/detail/{adverseReactionPhotoId}")
-    @ResponseBody
-    public Object detail(@PathVariable("adverseReactionPhotoId") Integer adverseReactionPhotoId) {
-        return adverseReactionPhotoService.selectById(adverseReactionPhotoId);
     }
 
     /**
@@ -76,6 +62,11 @@ public class AdverseReactionPhotoController extends BaseController {
     @RequestMapping(value = "/exportOne/{adverseReactionId}")
     @ResponseBody
     public Tip exportOne(@PathVariable("adverseReactionId") Integer adverseReactionId) throws Exception {
+
+    	Tip t=validate(adverseReactionId);
+    	if(null!=t) {
+    		return t;
+    	}
 
     	EntityWrapper<AdverseReactionPhoto> adverseReactionEntityWrapper = new EntityWrapper<AdverseReactionPhoto>();
         adverseReactionEntityWrapper.eq("adverse_reaction_id", adverseReactionId);
@@ -93,5 +84,20 @@ public class AdverseReactionPhotoController extends BaseController {
         ZipUtils.zipOut(super.getHttpServletResponse().getOutputStream(),fileSavePath, photos);
 		return SUCCESS_TIP;
 
+    }
+
+    /**
+     * @param adverseReactionId
+     * @return 返回null则验证成功，否则失败
+     */
+    private Tip validate(Integer adverseReactionId){
+    	Wrapper<AdverseReaction> wrapper= new EntityWrapper<AdverseReaction>();
+    	wrapper.eq("id", adverseReactionId);
+		int count=adverseReactionService.selectCount(wrapper);
+		if(count<1) {
+			return new ErrorTip(404,"没有此不良反应记录ID="+adverseReactionId);
+		}
+
+		return null;
     }
 }

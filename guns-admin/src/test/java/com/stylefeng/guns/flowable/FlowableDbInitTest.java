@@ -16,10 +16,10 @@ public class FlowableDbInitTest {
     @Test
     public void init() {
         ProcessEngineConfiguration cfg = new StandaloneProcessEngineConfiguration()
-                .setJdbcUrl("jdbc:mysql://127.0.0.1:3306/flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull")
+                .setJdbcUrl("jdbc:mysql://127.0.0.1:3306/flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL")
                 .setJdbcUsername("root")
                 .setJdbcPassword("root")
-                .setJdbcDriver("com.mysql.jdbc.Driver")
+                .setJdbcDriver("com.mysql.cj.jdbc.Driver")
                 .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
 
         ProcessEngine processEngine = cfg.buildProcessEngine();

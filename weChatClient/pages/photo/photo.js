@@ -9,7 +9,21 @@ Page({
   data: {
     text: '记录附件',
     id: -1,
-    src: []
+    src: [],
+    hints: '',
+    modalHidden2: true
+  },
+  //弹出提示框
+  modalTap2: function (msg) {
+    this.setData({
+      modalHidden2: false,
+      hints: msg
+    })
+  },
+  modalChange2: function (e) {
+    this.setData({
+      modalHidden2: true
+    })
   },
   back: function() {
     wx.navigateBack({
@@ -31,11 +45,7 @@ Page({
       },
       fail: function () {
         console.log("gotoShow fail");
-        wx.showToast({
-          title: "图片选择失败",
-          icon: 'fail',
-          duration: 2000
-        })
+        that.modalTap2("图片选择失败");
       },
       complete: function () {
         // complete
@@ -52,11 +62,7 @@ Page({
     console.log("theSrc=" + JSON.stringify(theSrc));
     if (theSrc.length<1){
       console.warn("未选择图片" + theUrl);
-      wx.showToast({
-        title: '未选择图片',
-        icon: 'fail',
-        duration: 2000
-      });
+      that.modalTap2("未选择图片");
       return;
     }
 
@@ -67,15 +73,11 @@ Page({
       success: function (res) {        
         console.log("上传成功返回：" + JSON.stringify(res));
         var obj = JSON.parse(res.data);
-        var resule = obj.code;
+        var resultCode = obj.code;
         var msg = obj.message;
-        if (resule != 200) {
+        if (resultCode != 200) {
           console.warn(theUrl+"服务器返回结果不为200,为" + JSON.stringify(res));
-          wx.showToast({
-            title: '上传失败:'+msg,
-            icon: 'fail',
-            duration: 2000
-          })
+          that.modalTap2('上传失败:' + msg);
         } else {
           wx.showModal({
             title: '上传成功，继续上传？',
@@ -95,11 +97,7 @@ Page({
       },
       fail: function () {
         console.error("上传失败 fail " + theUrl);
-        wx.showToast({
-          title: "上传失败，请重新上传",
-          icon: 'fail',
-          duration: 2000
-        })
+        that.modalTap2("上传失败,请确保网络可用,重新上传");
       },
       complete:function(){//无论成功失败，清空之前选择的图片
         that.setData({

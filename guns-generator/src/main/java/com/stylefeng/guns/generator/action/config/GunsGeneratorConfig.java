@@ -23,7 +23,7 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
 
     protected void dataSourceConfig() {
         dataSourceConfig.setDbType(DbType.MYSQL);
-        dataSourceConfig.setDriverName("com.mysql.jdbc.Driver");
+        dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
         dataSourceConfig.setUsername("root");
         dataSourceConfig.setPassword("root");
         dataSourceConfig.setUrl("jdbc:mysql://127.0.0.1:3306/adi_user_center?characterEncoding=utf8");
