@@ -35,7 +35,8 @@ CREATE TABLE `tbl_adverse_reaction` (
   `createtime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '填表日期',
   `updatetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改日期',
 
+  `create_user` varchar(45) DEFAULT NULL COMMENT '创建者',
   `version` int(11) DEFAULT NULL COMMENT '保留字段',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COMMENT='治疗过程中不良反应记录（病人填表）';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='治疗过程中不良反应记录（病人填表）';
 

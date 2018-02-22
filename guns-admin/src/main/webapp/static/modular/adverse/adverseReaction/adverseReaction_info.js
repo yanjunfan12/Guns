@@ -89,6 +89,7 @@ AdverseReactionInfoDlg.collectData = function() {
     .set('pneumoniaStatus')
     .set('esophagitisStatus')
     .set('otherStatusesDesc')
+    .set('createUser')
     ;
 }
 

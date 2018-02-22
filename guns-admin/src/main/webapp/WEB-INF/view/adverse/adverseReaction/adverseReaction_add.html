@@ -3,11 +3,8 @@
     <div class="ibox-content">
         <div class="form-horizontal">
 
-            <input type="hidden" id="id" value="">
-
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <!--<#input id="id" name="主键id" underline="true"/>-->
                             <#input id="patientNumber" name="住院号" underline="true"/>
                             <#input id="name" name="姓名" underline="true"/>
                             <#input id="radiotherapyCount" name="放疗次数" underline="true"/>
@@ -37,6 +34,7 @@
                             <#select id="pneumoniaStatus" name="肺炎" underline="true"/>
                             <#select id="esophagitisStatus" name="进食痛 " underline="true"/>
                             <#input id="otherStatusesDesc" name="其他症状，请在下面详细描述：" underline="true"/>
+                            <#input readonly="true" disabled="true" id="createUser"  name="填表人：" value="${shiro.getUser().account}" underline="true"/>
                 </div>
             </div>
 

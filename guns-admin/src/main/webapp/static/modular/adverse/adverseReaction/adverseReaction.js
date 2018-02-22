@@ -41,6 +41,7 @@ AdverseReaction.initColumn = function () {
             {title: '肺炎', field: 'pneumoniaStatusName', visible: true, align: 'center', valign: 'middle'},
             {title: '进食痛', field: 'esophagitisStatusName', visible: true, align: 'center', valign: 'middle'},
             {title: '其他症状', field: 'otherStatusesDesc', visible: true, align: 'center', valign: 'middle'},
+            {title: '填表人', field: 'createUser', visible: true, align: 'center', valign: 'middle', sortable: false},
             {title: '填表日期', field: 'createtime', visible: true, align: 'center', valign: 'middle', sortable: true},
             {title: '修改日期', field: 'updatetime', visible: true, align: 'center', valign: 'middle', sortable: true},
     ];

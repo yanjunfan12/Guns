@@ -237,7 +237,14 @@ public class AdverseReaction extends Model<AdverseReaction> {
      */
     @ApiModelProperty(value="修改日期",required=false,hidden=true)
     @Null(message="修改日期必须为null，后续将由服务端生成")
-    private Date updatetime;
+    private Date updatetime;    
+    /**
+     * 创建者
+     */
+    @ApiModelProperty(value="创建者",required=true,hidden=false)
+    @NotBlank(message="创建者不能为空")
+    @TableField("create_user")
+    private String createUser;    
     /**
      * 保留字段
      */
@@ -245,8 +252,15 @@ public class AdverseReaction extends Model<AdverseReaction> {
 //    @Null(message="保留字段必须为null，后续将由服务端生成")//修改时，可能有，故不在validate的POJO注释标记
     private Integer version;
 
+    public String getCreateUser() {
+		return createUser;
+	}
 
-    public Integer getId() {
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -523,6 +537,7 @@ public class AdverseReaction extends Model<AdverseReaction> {
         ", otherStatusesDesc=" + otherStatusesDesc +
         ", createtime=" + createtime +
         ", updatetime=" + updatetime +
+        ", createUser=" + createUser +
         ", version=" + version +
         "}";
     }

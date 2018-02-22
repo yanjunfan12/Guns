@@ -1,13 +1,13 @@
 package com.stylefeng.guns.config.web;
 
-import com.stylefeng.guns.config.properties.BeetlProperties;
-import com.stylefeng.guns.core.beetl.BeetlConfiguration;
 import org.beetl.core.resource.ClasspathResourceLoader;
 import org.beetl.ext.spring.BeetlSpringViewResolver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.stylefeng.guns.config.properties.BeetlProperties;
+import com.stylefeng.guns.core.beetl.BeetlConfiguration;
 
 /**
  * web 配置类
