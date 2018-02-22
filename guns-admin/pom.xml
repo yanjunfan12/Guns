@@ -125,10 +125,6 @@
             <artifactId>core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ibeetl</groupId>
-            <artifactId>beetl</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
@@ -158,6 +154,11 @@
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi-examples</artifactId>
 		    <version>3.17</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.ibeetl</groupId>
+			<artifactId>beetl-framework-starter</artifactId>
 		</dependency>
 
     </dependencies>

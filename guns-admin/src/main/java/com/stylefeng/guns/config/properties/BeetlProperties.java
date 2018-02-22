@@ -28,8 +28,20 @@ public class BeetlProperties {
     private String resourceTagsuffix;
 
     private String resourceAutoCheck;
+    
+    private String engine;
+    
+    
 
-    @Value("${spring.mvc.view.prefix}")
+    public String getEngine() {
+		return engine;
+	}
+
+	public void setEngine(String engine) {
+		this.engine = engine;
+	}
+
+	@Value("${spring.mvc.view.prefix}")
     private String prefix;
 
     public Properties getProperties(){
@@ -53,6 +65,10 @@ public class BeetlProperties {
         }
         if(ToolUtil.isNotEmpty(resourceAutoCheck)){
             properties.setProperty("RESOURCE.autoCheck",resourceAutoCheck);
+        }
+        
+        if(ToolUtil.isNotEmpty(engine)){
+            properties.setProperty("ENGINE",engine);
         }
         return properties;
     }

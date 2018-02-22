@@ -16,18 +16,18 @@ import com.stylefeng.guns.core.beetl.BeetlConfiguration;
  * @date 2016年11月12日 下午5:03:32
  */
 @Configuration
-public class BeetlConfig {
+public class BeetlConf {
 
-    @Autowired
+	@Autowired
     BeetlProperties beetlProperties;
 
     /**
      * beetl的配置
      */
-    @Bean(initMethod = "init")
+    @Bean(initMethod = "init", name = "beetlConfig")
     public BeetlConfiguration beetlConfiguration() {
         BeetlConfiguration beetlConfiguration = new BeetlConfiguration();
-        beetlConfiguration.setResourceLoader(new ClasspathResourceLoader(BeetlConfig.class.getClassLoader(), beetlProperties.getPrefix()));
+        beetlConfiguration.setResourceLoader(new ClasspathResourceLoader(BeetlConf.class.getClassLoader(), beetlProperties.getPrefix()));
         beetlConfiguration.setConfigProperties(beetlProperties.getProperties());
         return beetlConfiguration;
     }
