@@ -8,46 +8,53 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     text: '治疗记录',
-    weakStatusIndex: 0,
+    weakStatusIndex: -1,
     weakStatusArray: {},
-    dietaryStatusIndex: 0,
+    dietaryStatusIndex: -1,
     dietaryStatusArray: {},
-    nauseaStatusIndex: 0,
+    nauseaStatusIndex: -1,
     nauseaStatusArray: {},
-    vomitStatusIndex: 0,
+    vomitStatusIndex: -1,
     vomitStatusArray: {},
-    diarrheaStatusIndex: 0,
+    diarrheaStatusIndex: -1,
     diarrheaStatusArray: {},
-    constipationStatusIndex: 0,
+    constipationStatusIndex: -1,
     constipationStatusArray: {},
-    muscleJointPainStatusIndex: 0,
+    muscleJointPainStatusIndex: -1,
     muscleJointPainStatusArray: {},
-    nervousSystemStatusIndex: 0,
+    nervousSystemStatusIndex: -1,
     nervousSystemStatusArray: {},
-    alopeciaStatusIndex: 0,
+    alopeciaStatusIndex: -1,
     alopeciaStatusArray: {},
-    feverStatusIndex: 0,
+    feverStatusIndex: -1,
     feverStatusArray: {},
-    coughStatusIndex: 0,
+    coughStatusIndex: -1,
     coughStatusArray: {},    
-    skinStatusIndex: 0,
+    skinStatusIndex: -1,
     skinStatusArray: {},
-    hiccupStatusIndex: 0,
+    hiccupStatusIndex: -1,
     hiccupStatusArray: {},
-    oralMucositisStatusIndex: 0,
+    oralMucositisStatusIndex: -1,
     oralMucositisStatusArray: {},
-    hoarsenessStatusIndex: 0,
+    hoarsenessStatusIndex: -1,
     hoarsenessStatusArray: {},
-    hearingStatusIndex: 0,
+    hearingStatusIndex: -1,
     hearingStatusArray: {},
-    dizzyStatusIndex: 0,
+    dizzyStatusIndex: -1,
     dizzyStatusArray: {},
-    headacheStatusIndex: 0,
+    headacheStatusIndex: -1,
     headacheStatusArray: {},
-    pneumoniaStatusIndex: 0,
+    pneumoniaStatusIndex: -1,
     pneumoniaStatusArray: {},
-    esophagitisStatusIndex: 0,
+    esophagitisStatusIndex: -1,
     esophagitisStatusArray: {},
+
+    otherStatusesDesc: null,
+    name: null,
+    patientNumber: null,
+    radiotherapyCount: null,
+    chemotherapyCount: null,
+    weight: null,
 
     toast1Hidden: true,
     modalHidden: true,
@@ -86,7 +93,7 @@ Page({
         var resultCode = obj.code;
         var msg = obj.message;
         if (resultCode != 200) {
-          console.warn(theUrl + "服务器返回结果不为200,为" + JSON.stringify(res));
+          console.warn(indexUrl + "服务器返回结果不为200,为" + JSON.stringify(res));
           that.setData({
             modalHidden: true
           });
@@ -95,13 +102,9 @@ Page({
           that.setData({
             modalHidden: true,
             toast1Hidden: false,
-            notice_str: '提交成功,跳转...',
+            notice_str: '提交成功.',
           });
-          var theUrl = '/pages/photo/photo?id=' + res.data.message;
-          console.log( "theUrl=" + theUrl);
-          wx.navigateTo({
-            url: theUrl
-          })
+          that.resetForm();
         }
       },
       fail: function () {
@@ -509,5 +512,35 @@ Page({
   formReset: function () {
     console.log('form发生了reset事件');
     this.modalTap2('清空成功');
+  },
+  resetForm: function (){
+    this.setData({
+      weakStatusIndex: -1,
+      dietaryStatusIndex: -1,
+      nauseaStatusIndex: -1,
+      vomitStatusIndex: -1,
+      diarrheaStatusIndex: -1,
+      constipationStatusIndex: -1,
+      muscleJointPainStatusIndex: -1,
+      nervousSystemStatusIndex: -1,
+      alopeciaStatusIndex: -1,
+      feverStatusIndex: -1,
+      coughStatusIndex: -1,
+      skinStatusIndex: -1,
+      hiccupStatusIndex: -1,
+      oralMucositisStatusIndex: -1,
+      hoarsenessStatusIndex: -1,
+      hearingStatusIndex: -1,
+      dizzyStatusIndex: -1,
+      headacheStatusIndex: -1,
+      pneumoniaStatusIndex: -1,
+      esophagitisStatusIndex: -1,
+      otherStatusesDesc: null,
+      name: null,
+      patientNumber: null,
+      radiotherapyCount: null,
+      chemotherapyCount: null,
+      weight: null,
+    });
   }
 })

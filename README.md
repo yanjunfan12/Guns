@@ -163,3 +163,32 @@ jwt token鉴权机制是指若需要请求服务器接口,必须通过AuthContro
 
 ## 曾获荣誉
 ![输入图片说明](https://gitee.com/uploads/images/2017/1015/151932_f1593f87_551203.jpeg "initpintu_副本_副本.jpg")
+
+
+##使用说明
+
+    导入sql/guns.sql文件到mysql数据库
+    以maven方式导入项目到ide
+    修改application.yml中的数据库相关的配置,改为您本机的数据库配置
+    启动项目,管理员账号admin/密码111111
+
+###如何启动项目 Guns目前支持三种启动方式:
+
+    在IDE里运行GunsApplication类中的main方法启动
+    执行如下maven命令
+
+clean package -Dmaven.test.skip=true
+
+并从target目录中找到guns-1.0.0-SNAPSHOT.jar,并在jar包的目录下执行如下java命令
+
+java -jar guns-1.0.0-SNAPSHOT.jar
+
+    修改pom.xml中如下片段
+
+<packaging>jar</packaging>
+
+改为
+
+<packaging>war</packaging>
+
+并打包放入到tomcat中执行

@@ -65,6 +65,7 @@ AdverseReactionInfoDlg.collectData = function() {
     .set('id')
     .set('patientNumber')
     .set('name')
+    .set('category')
     .set('radiotherapyCount')
     .set('chemotherapyCount')
     .set('weight')
@@ -90,6 +91,7 @@ AdverseReactionInfoDlg.collectData = function() {
     .set('esophagitisStatus')
     .set('otherStatusesDesc')
     .set('createUser')
+    .set('updateUser')
     ;
 }
 

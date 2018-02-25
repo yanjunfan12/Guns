@@ -5,9 +5,10 @@ DROP TABLE IF EXISTS `tbl_adverse_reaction_photo`;
 
 CREATE TABLE `tbl_adverse_reaction_photo` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `adverse_reaction_id` int(11) NOT NULL COMMENT '治疗过程中不良反应记录（病人填表）主键id',
+  `name` varchar(45) not NULL COMMENT '姓名',
   `photo_path` varchar(245) NOT NULL COMMENT '图片路径',
 
+  `create_user` varchar(45) DEFAULT NULL COMMENT '创建者',
   `createtime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '填表日期',
   `updatetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改日期',
 

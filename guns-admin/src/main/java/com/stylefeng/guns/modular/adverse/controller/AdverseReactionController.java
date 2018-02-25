@@ -105,14 +105,23 @@ public class AdverseReactionController extends BaseController {
     @Permission
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(@RequestParam(required = false) String name, @RequestParam(required = false) String patientNumber) {
-        Page<AdverseReaction> page = new PageFactory<AdverseReaction>().defaultPage();//BootStrap Table默认的分页参数创建
+    public Object list(@RequestParam(required = false) String name
+    		, @RequestParam(required = false) String patientNumber
+    		, @RequestParam(required = false) Integer category) {
+       
+    	log.warn("name="+name
+    			+",patientNumber="+patientNumber
+    			+",category="+category);
+    	
+    	Page<AdverseReaction> page = new PageFactory<AdverseReaction>().defaultPage();//BootStrap Table默认的分页参数创建
 
     	EntityWrapper<AdverseReaction> adverseReactionEntityWrapper = new EntityWrapper<AdverseReaction>();
         if(!StringUtils.isBlank(name))
         	adverseReactionEntityWrapper.like("name", name,SqlLike.RIGHT);
         if(!StringUtils.isBlank(patientNumber))
         	adverseReactionEntityWrapper.eq("patient_number", patientNumber);
+        if(null!=category)
+        	adverseReactionEntityWrapper.eq("category", category);
 
     	Page<Map<String, Object>> pageResult = adverseReactionService.selectMapsPage(page,adverseReactionEntityWrapper);
     	List<Map<String, Object>> rows=(List<Map<String, Object>>) super.warpObject(new AdverseReactionWarpper(pageResult.getRecords()));

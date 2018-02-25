@@ -34,6 +34,8 @@
         <result column="createtime" property="createtime" />
         <result column="updatetime" property="updatetime" />
         <result column="create_user" property="createUser" />
+        <result column="update_user" property="updateUser" />
+        <result column="category" property="category" />
         <result column="version" property="version" />
     </resultMap>
 
@@ -41,6 +43,8 @@
     <sql id="Base_Column_List">
         id, patient_number AS patientNumber, name, radiotherapy_count AS radiotherapyCount, chemotherapy_count AS chemotherapyCount, weight, Dietary_status AS dietaryStatus, weak_status AS weakStatus, nausea_status AS nauseaStatus, Vomit_status AS vomitStatus, diarrhea_status AS diarrheaStatus, constipation_status AS constipationStatus, Muscle_joint_pain_status AS muscleJointPainStatus, nervous_system_status AS nervousSystemStatus, Alopecia_status AS alopeciaStatus, fever_status AS feverStatus, cough_status AS coughStatus, skin_status AS skinStatus, Hiccup_status AS hiccupStatus, Oral_mucositis_status AS oralMucositisStatus, Hoarseness_status AS hoarsenessStatus, hearing_status AS hearingStatus, Dizzy_status AS dizzyStatus, headache_status AS headacheStatus, pneumonia_status AS pneumoniaStatus, Esophagitis_status AS esophagitisStatus, other_statuses_desc AS otherStatusesDesc, createtime, updatetime, version
         ,create_user as createUser
+        ,category 
+        ,update_user as updateUser
     </sql>
 
 </mapper>

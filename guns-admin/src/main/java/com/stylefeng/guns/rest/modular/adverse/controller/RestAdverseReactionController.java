@@ -47,6 +47,9 @@ public class RestAdverseReactionController extends BaseController {
 //    	adverseReaction.setUpdatetime(null);//更新时间不能接口输入设定，而是数据库自动设定
     	adverseReaction.setVersion(null);//乐观锁保留字段不能接口输入设定//修改时，可能有，故不在validate的POJO注释标记
 
+    	adverseReaction.setCategory(null);//分类不能接口输入设定，而是管理网页更新//修改时，验证要求有，故不在validate的POJO注释标记
+    	adverseReaction.setUpdateUser(null);//新增时，更新人为空//修改时，验证要求有，故不在validate的POJO注释标记
+        
     	adverseReactionService.insert(adverseReaction);
 
         int id=adverseReaction.getId();

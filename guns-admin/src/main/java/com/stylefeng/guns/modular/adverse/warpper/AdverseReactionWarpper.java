@@ -100,6 +100,10 @@ public class AdverseReactionWarpper extends BaseControllerWarpper {
         String esophagitisStatusName=ConstantFactory.me().getDictsByName("进食痛", esophagitisStatus);
         map.put("esophagitisStatusName", esophagitisStatusName);
 
+        Integer category = (Integer) map.get("category");
+        String categoryName=ConstantFactory.me().getDictsByName("分类", category);
+        map.put("categoryName", categoryName);
+        
     }
 
 }

@@ -2,13 +2,28 @@
 #add{  
     background: #f5f5f5;  
 }  
+.page__hd{    
+    text-align: center;
+}
+.page__title{
+    display: inline-block;    
+    font-size: x-large;
+    border-bottom: 1rpx solid #CCCCCC;
+}
+.section__text{
+    float: left;    
+    width:100%; 
+    font-size: x-large;
+}
 .section__title{  
-    float: left;  
+    float: left;    
     width:30%;  
+    font-size: x-large;
 }  
 .form-group{  
     float: right;  
     width: 70%;  
+    font-size: x-large;
 }  
 .section{  
     clear: both;  
@@ -16,28 +31,36 @@
     margin: 2rem auto;  
 }  
 .input-text{  
-    padding: 5px; 
-    border: 1px solid #ddd;  
+    padding: 5rpx; 
+    border: 1rpx solid #ddd;  
     width: 100%;  
     background-color: #FFFFFF;  
+    font-size: x-large;
 }  
 .input-hidden{
-    width:0%;  
-    height: 0%;
+    display: none;
 }
-.button{  
-    border: 1px solid #1aad19;  
-    border-radius: 2px;  
+.button__reset{  
+    border: 1rpx solid #1aad19;  
+    border-radius: 2rpx;  
+    background-color: red; 
 }  
+.button__submit{  
+    border: 1rpx solid #1aad19;  
+    background-color: green; 
+    border-radius: 2rpx;  
+} 
 .picker{  
-    padding: 0px;  
+    padding: 0rpx;  
     background-color: #FFFFFF;  
     width: 100%;  
+    font-size: x-large;
 }  
 .textAera{  
-    padding: 5px;  
+    padding: 5rpx;  
     float: left;  
     width: 100%;  
-    border: 1px solid #ddd;  
+    border: 1rpx solid #ddd;  
     background-color: #FFFFFF;  
+    font-size: x-large;
 } 

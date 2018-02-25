@@ -29,11 +29,12 @@
     	            dataType:"json",
     	            data : { "parentName" : sel.attr("loadData")},
     	            success : function(result){
+    	            	sel.append("<option value='' selected>未选择</option>");
     	                for (var i=0; i<result.length; i++){
     	                    if(defaultValue && defaultValue == result[i].id){
-    	                        sel.append("<option value="+result[i].id+" selected>"+result[i].text);
+    	                        sel.append("<option value="+result[i].id+" selected>"+result[i].text+"</option>");
     	                    }else{
-    	                        sel.append("<option value="+result[i].id+">"+result[i].text);
+    	                        sel.append("<option value="+result[i].id+">"+result[i].text+"</option>");
     	                    }
     	                }
     	            }

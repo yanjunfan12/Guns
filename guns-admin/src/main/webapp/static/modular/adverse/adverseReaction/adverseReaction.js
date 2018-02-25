@@ -17,6 +17,7 @@ AdverseReaction.initColumn = function () {
             {title: '主键id', field: 'id', visible: true, align: 'center', valign: 'middle', sortable: true},
             {title: '住院号', field: 'patientNumber', visible: true, align: 'center', valign: 'middle', sortable: true},
             {title: '姓名', field: 'name', visible: true, align: 'center', valign: 'middle', sortable: true},
+            {title: '分类', field: 'categoryName', visible: true, align: 'center', valign: 'middle', sortable: true},            
             {title: '放疗次数', field: 'radiotherapyCount', visible: true, align: 'center', valign: 'middle'},
             {title: '化疗次数', field: 'chemotherapyCount', visible: true, align: 'center', valign: 'middle'},
             {title: '体重', field: 'weight', visible: true, align: 'center', valign: 'middle'},
@@ -42,6 +43,7 @@ AdverseReaction.initColumn = function () {
             {title: '进食痛', field: 'esophagitisStatusName', visible: true, align: 'center', valign: 'middle'},
             {title: '其他症状', field: 'otherStatusesDesc', visible: true, align: 'center', valign: 'middle'},
             {title: '填表人', field: 'createUser', visible: true, align: 'center', valign: 'middle', sortable: false},
+            {title: '更新人', field: 'updateUser', visible: true, align: 'center', valign: 'middle', sortable: false},
             {title: '填表日期', field: 'createtime', visible: true, align: 'center', valign: 'middle', sortable: true},
             {title: '修改日期', field: 'updatetime', visible: true, align: 'center', valign: 'middle', sortable: true},
     ];
@@ -156,6 +158,7 @@ AdverseReaction.formParams = function() {
     var queryData = {};
     queryData['name'] = $("#name").val();
     queryData['patientNumber'] = $("#patientNumber").val();
+    queryData['category'] = $("#category").val();
 
     return queryData;
 }
@@ -174,4 +177,8 @@ $(function () {
     table.setPaginationType("server");
     table.setQueryParams(AdverseReaction.formParams());
     AdverseReaction.table = table.init();
+    
+	//下拉框中有loadData属性的selectOptions封装
+    var fanSelectOptions=new FanSelectOptions();
+    fanSelectOptions.init();
 });

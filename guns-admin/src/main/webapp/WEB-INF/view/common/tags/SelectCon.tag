@@ -3,6 +3,7 @@
 
     name : 查询条件的名称
     id : 查询内容的input框id
+    defaultValue : 指定默认选定项
 @*/
 <div class="input-group">
     <div class="input-group-btn">
@@ -10,7 +11,11 @@
             ${name}
         </button>
     </div>
-    <select class="form-control" id="${id}">
+    <select class="form-control" id="${id}" loadData="${name}"
+    @if(isNotEmpty(defaultValue)){
+    defaultValue="${defaultValue}"
+    @}
+    >
         ${tagBody!}
     </select>
 </div>

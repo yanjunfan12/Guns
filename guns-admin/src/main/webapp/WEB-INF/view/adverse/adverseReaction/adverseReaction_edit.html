@@ -36,7 +36,8 @@
                             <#select id="pneumoniaStatus" name="肺炎" defaultValue="${item.pneumoniaStatus}" underline="true"/>
                             <#select id="esophagitisStatus" name="进食痛" defaultValue="${item.esophagitisStatus}" underline="true"/>
                             <#input id="otherStatusesDesc" name="其他症状，请在下面详细描述：" value="${item.otherStatusesDesc}" underline="true"/>
-							<#input readonly="true" disabled="true" id="createUser"  name="填表人：" value="${shiro.getUser().account}" underline="true"/>
+                            <#input readonly="true" disabled="true" id="createUser"  name="填表人：" value="${item.createUser}" underline="true"/>
+							<#input readonly="true" disabled="true" id="updateUser"  name="更新人：" value="${shiro.getUser().account}" underline="true"/>
                 </div>
             </div>
 

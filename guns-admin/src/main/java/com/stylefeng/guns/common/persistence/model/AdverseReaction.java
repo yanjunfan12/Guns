@@ -239,12 +239,28 @@ public class AdverseReaction extends Model<AdverseReaction> {
     @Null(message="修改日期必须为null，后续将由服务端生成")
     private Date updatetime;    
     /**
-     * 创建者
+     * 填表人
      */
-    @ApiModelProperty(value="创建者",required=true,hidden=false)
-    @NotBlank(message="创建者不能为空")
+    @ApiModelProperty(value="填表人",required=true,hidden=false)
+    @NotBlank(message="填表人不能为空")
     @TableField("create_user")
     private String createUser;    
+    
+    /**
+     * 更新人
+     */
+    @ApiModelProperty(value="填表人",required=false,hidden=true)
+//    @NotBlank(message="填表人不能为空")//新增时可用为空，修改时不为空
+    @TableField("update_user")
+    private String updateUser; 
+    
+    /**
+     * 分类  1 TF 2 TC 3 TP 4 术后大野 5 高剂量 6 低剂量 7 华蟾素 8 艾坦 9 SBRT
+     */
+    @ApiModelProperty(value="分类",required=false,hidden=true)
+//    @Null(message="分类必须为null，后续将由服务端管理网页赋值")//新增时可用为空，修改时不为空
+    private Integer category;
+    
     /**
      * 保留字段
      */
@@ -252,7 +268,23 @@ public class AdverseReaction extends Model<AdverseReaction> {
 //    @Null(message="保留字段必须为null，后续将由服务端生成")//修改时，可能有，故不在validate的POJO注释标记
     private Integer version;
 
-    public String getCreateUser() {
+    public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+	public Integer getCategory() {
+		return category;
+	}
+
+	public void setCategory(Integer category) {
+		this.category = category;
+	}
+
+	public String getCreateUser() {
 		return createUser;
 	}
 

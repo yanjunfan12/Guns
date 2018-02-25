@@ -23,6 +23,7 @@ public class ExcelUtils {
 		TITLE_2_KEY.put("主键id", "id");
 		TITLE_2_KEY.put("住院号", "patientNumber");
 		TITLE_2_KEY.put("姓名", "name");
+		TITLE_2_KEY.put("分类", "categoryName");
 		TITLE_2_KEY.put("放疗次数 ", "radiotherapyCount");
 		TITLE_2_KEY.put("化疗次数", "chemotherapyCount");
 		TITLE_2_KEY.put("体重", "weight");
@@ -47,6 +48,8 @@ public class ExcelUtils {
 		TITLE_2_KEY.put("肺炎", "pneumoniaStatusName");
 		TITLE_2_KEY.put("进食痛", "esophagitisStatusName");
 		TITLE_2_KEY.put("其他症状", "otherStatusesDesc");
+		TITLE_2_KEY.put("填表人", "createUser");
+		TITLE_2_KEY.put("更新人", "updateUser");
 		TITLE_2_KEY.put("填表日期", "createtime");
 		TITLE_2_KEY.put("修改日期", "updatetime");
 

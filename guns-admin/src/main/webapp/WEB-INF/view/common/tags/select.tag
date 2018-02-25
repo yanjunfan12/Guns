@@ -3,6 +3,7 @@
     name : select的名称
     id : select的id
     underline : 是否带分割线
+    defaultValue : 指定默认选定项
 @*/
 <div class="form-group">
     <label class="col-sm-3 control-label">${name}</label>
