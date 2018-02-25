@@ -73,8 +73,12 @@ Page({
     })
   },
   confirm_one: function (e) {
+    this.setData({//立马隐藏，防止重复提交
+      modalHidden: true
+    });
     console.log(e);
     var formData = this.data.formData;
+    formData.createUser=this.data.userInfo.nickName;
     console.log('formData为', JSON.stringify(formData));
     var indexUrl = app.globalData.fanUrlHead + '/adverseReaction/add';
     console.log("indexUrl=" + indexUrl);
@@ -94,13 +98,9 @@ Page({
         var msg = obj.message;
         if (resultCode != 200) {
           console.warn(indexUrl + "服务器返回结果不为200,为" + JSON.stringify(res));
-          that.setData({
-            modalHidden: true
-          });
           that.modalTap2('提交失败:' + msg);
         } else {
           that.setData({
-            modalHidden: true,
             toast1Hidden: false,
             notice_str: '提交成功.',
           });
@@ -109,9 +109,6 @@ Page({
       },
       fail: function () {
         console.error("submit fail " + JSON.stringify(formData));
-        that.setData({
-          modalHidden: true
-        });
         that.modalTap2('提交失败,请重新提交');
       },
       complete: function () {

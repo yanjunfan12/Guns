@@ -315,14 +315,6 @@
         <textarea name="otherStatusesDesc" value="{{otherStatusesDesc}}" class="textAera" auto-height="true" placeholder="请详细描述其他症状" maxlength="999" />
       </view>
     </view>
-    <view class="section">
-      <view class="section__text">微信昵称:</view>
-    </view>
-    <view class="section">
-      <view class="section__text">
-        <input type="text" disabled='true' class="input-text" name="createUser" value="{{userInfo.nickName}}" />
-      </view>
-    </view>
     <view class="section"><!--填充留白-->
       <view class="section__text"></view>
     </view>
@@ -334,6 +326,10 @@
       <button formType="reset" class='button__reset'>重填</button>
     </view>
   </form>
+
+  <view class="section btn-area">
+      <button type="default" bindtap="refreshSelectOptions">刷新选项</button>
+  </view>
 
   <!-- 黑框提示并消失 -->
   <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">
