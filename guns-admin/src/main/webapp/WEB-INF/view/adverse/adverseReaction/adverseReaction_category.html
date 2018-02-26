@@ -1,0 +1,29 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="adverseReactionInfo">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="id" name="记录主键id" value="${item.id}" readonly="true" underline="true"/>
+                    <#input id="patientNumber" name="住院号" value="${item.patientNumber}" readonly="true" underline="true"/>
+                    <#input id="name" name="姓名" value="${item.name}" readonly="true" underline="true"/>
+                </div>
+
+                <div class="col-sm-6">
+                     <#select id="category" name="分类" defaultValue="${item.category}" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="AdverseReactionInfoDlg.categorySubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="AdverseReactionInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/adverse/adverseReaction/adverseReaction_info.js"></script>
+@}

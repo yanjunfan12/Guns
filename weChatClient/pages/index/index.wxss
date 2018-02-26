@@ -15,16 +15,6 @@
     width:100%; 
     font-size: x-large;
 }
-.section__title{  
-    float: left;    
-    width:30%;  
-    font-size: x-large;
-}  
-.form-group{  
-    float: right;  
-    width: 70%;  
-    font-size: x-large;
-}  
 .section{  
     clear: both;  
     width: 90%;  
@@ -44,11 +34,13 @@
     border: 1rpx solid #1aad19;  
     border-radius: 2rpx;  
     background-color: red; 
+    font-size: x-large;
 }  
 .button__submit{  
     border: 1rpx solid #1aad19;  
     background-color: green; 
     border-radius: 2rpx;  
+    font-size: x-large;
 } 
 .picker{  
     padding: 0rpx;  

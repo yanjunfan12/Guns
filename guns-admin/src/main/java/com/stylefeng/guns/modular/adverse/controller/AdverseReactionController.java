@@ -20,7 +20,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,10 +35,13 @@ import com.stylefeng.guns.common.persistence.model.AdverseReaction;
 import com.stylefeng.guns.config.properties.GunsProperties;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
+import com.stylefeng.guns.core.base.tips.Tip;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.page.PageInfoBT;
 import com.stylefeng.guns.modular.adverse.service.IAdverseReactionService;
 import com.stylefeng.guns.modular.adverse.warpper.AdverseReactionWarpper;
+
+import io.swagger.annotations.ApiOperation;
 
 /**
  * 不良反应记录控制器
@@ -75,6 +80,17 @@ public class AdverseReactionController extends BaseController {
     @RequestMapping("/adverseReaction_add")
     public String adverseReactionAdd() {
         return PREFIX + "adverseReaction_add.html";
+    }
+    
+    /**
+     * 跳转到分类不良反应记录
+     */
+    @RequestMapping("/adverseReaction_category/{adverseReactionId}")
+    public String adverseReactionCategory(@PathVariable Integer adverseReactionId, Model model) {
+        AdverseReaction adverseReaction = adverseReactionService.selectById(adverseReactionId);
+        model.addAttribute("item",adverseReaction);
+        LogObjectHolder.me().set(adverseReaction);
+    	return PREFIX + "adverseReaction_category.html";
     }
 
     /**
@@ -149,6 +165,29 @@ public class AdverseReactionController extends BaseController {
         	return super.SUCCESS_TIP;
         else{
         	return new ErrorTip(404,"修改不良反应记录失败，ID="+adverseReaction.getId());
+        }
+    }
+    
+    /**
+     * 分类不良反应记录
+     */
+    @Permission
+    @RequestMapping(value = "/category/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Tip category(
+    		@NotNull(message="主键id入参不能为null")
+    		@PathVariable("id") Integer id,
+    		@NotNull(message="分类入参不能为null")
+    		@RequestParam("category") Integer category) {
+
+    	AdverseReaction adverseReaction=new AdverseReaction();
+    	adverseReaction.setId(id);
+    	adverseReaction.setCategory(category);
+		boolean flag=adverseReactionService.updateById(adverseReaction);
+        if(flag)
+        	return super.SUCCESS_TIP;
+        else{
+        	return new ErrorTip(404,"分类不良反应记录失败，ID="+id);
         }
     }
 

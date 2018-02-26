@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -58,24 +59,34 @@ public class RestAdverseReactionPhotoController extends BaseController {
      * 上传图片附件，并新增图片附件记录
      */
     @ApiOperation("上传一个图片附件，并新增图片附件记录")
-    @RequestMapping(method = RequestMethod.POST, path = "/upload/{adverseReactionId}")
+    @RequestMapping(method = RequestMethod.POST, path = "/upload/{name}/{createUser}")
     public Tip upload(
     		@NotNull(message="文件列表入参不能为null")
     		@RequestPart(required = true) MultipartFile file,
-    		@NotNull(message="不良反应记录ID入参不能为null")
-    		@PathVariable("adverseReactionId") Integer adverseReactionId) {
+    		@NotNull(message="姓名入参不能为null")
+    		@PathVariable("name") String name,
+    		@NotBlank(message="上传人入参不能为空")
+    		@PathVariable("createUser") String createUser) {
 
-    	Tip t=validate(adverseReactionId);
+    	name=null==name?null:name.trim();
+    	
+    	Tip t=validate(name);
     	if(null!=t) {
     		return t;
     	}
 
-    	int id=processOne(file, adverseReactionId);
+    	int id=processOne(file, name,createUser);
         return new ErrorTip(200,id+"");
     }
 
-    private int processOne(MultipartFile file, Integer adverseReactionId) {
-        String pictureName = adverseReactionId+"_"+UUID.randomUUID().toString() + "_" +  file.getOriginalFilename() + ".jpg";
+    /**
+     * @param file
+     * @param name
+     * @param createUser
+     * @return
+     */
+    private int processOne(MultipartFile file, String name,String createUser) {
+        String pictureName = name+"_"+UUID.randomUUID().toString() + "_" +  file.getOriginalFilename() + ".jpg";
         try {
             String fileSavePath = gunsProperties.getFileUploadPath();
             file.transferTo(new File(fileSavePath + pictureName));
@@ -83,8 +94,9 @@ public class RestAdverseReactionPhotoController extends BaseController {
             throw new GunsException(BizExceptionEnum.UPLOAD_ERROR);
         }
         AdverseReactionPhoto adverseReactionPhoto=new AdverseReactionPhoto();
-        adverseReactionPhoto.setAdverseReactionId(adverseReactionId);
+        adverseReactionPhoto.setName(name);
         adverseReactionPhoto.setPhotoPath(pictureName);
+        adverseReactionPhoto.setCreateUser(createUser);
         adverseReactionPhotoService.insert(adverseReactionPhoto);
         int id=adverseReactionPhoto.getId();
 
@@ -92,15 +104,15 @@ public class RestAdverseReactionPhotoController extends BaseController {
     }
 
     /**
-     * @param adverseReactionId
+     * @param name
      * @return 返回null则验证成功，否则失败
      */
-    private Tip validate(Integer adverseReactionId){
+    private Tip validate(String name){
     	Wrapper<AdverseReaction> wrapper= new EntityWrapper<AdverseReaction>();
-    	wrapper.eq("id", adverseReactionId);
+    	wrapper.eq("name", name);
 		int count=adverseReactionService.selectCount(wrapper);
 		if(count<1) {
-			return new ErrorTip(404,"没有此不良反应记录ID="+adverseReactionId);
+			return new ErrorTip(404,"没有此不良反应记录,姓名="+name);
 		}
 
 		return null;
@@ -121,17 +133,18 @@ public class RestAdverseReactionPhotoController extends BaseController {
 //    	  @ApiImplicitParam(name="files",value="文件列表", dataTypeClass=MultipartFile[].class,paramType = "form",allowMultiple=true,required=true),
     	  //无效，是array [string] 	(formData)，而不是array [file](formData)
     	  @ApiImplicitParam(name="adverseReactionId",value="不良反应记录ID",dataType="int", paramType = "path",example="56")})
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, path = "/uploads/{adverseReactionId}")
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, path = "/uploads/{name}/{createUser}")
     public Tip uploads(
     		@NotNull(message="文件列表入参不能为null")
     		@Size(min=1,message="文件列表入参不能为空")
     		@ApiParam(value = "文件列表", allowMultiple = true, required = true)@RequestPart(required = true)
     		MultipartFile[] files,
-    		@NotNull(message="不良反应记录ID入参不能为null")
-    		@PathVariable("adverseReactionId")
-    		Integer adverseReactionId) {
+    		@NotNull(message="姓名入参不能为null")
+    		@PathVariable("name")
+    		String name,
+    		@PathVariable("createUser") String createUser) {
 
-    	Tip t=validate(adverseReactionId);
+    	Tip t=validate(name);
     	if(null!=t) {
     		return t;
     	}
@@ -141,7 +154,7 @@ public class RestAdverseReactionPhotoController extends BaseController {
 //    		return new ErrorTip(501,"文件列表为空"+files);
 //    	}
     	for(MultipartFile file:files) {
-    		int id=processOne(file, adverseReactionId);
+    		int id=processOne(file, name,createUser);
     		ids+=id+",";
     	}
 

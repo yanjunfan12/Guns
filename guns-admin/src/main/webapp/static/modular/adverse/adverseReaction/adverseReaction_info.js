@@ -138,6 +138,31 @@ AdverseReactionInfoDlg.editSubmit = function() {
     ajax.start();
 }
 
+/**
+ * 提交分类
+ */
+AdverseReactionInfoDlg.categorySubmit = function() {
+
+    this.clearData();
+    this.collectData();
+
+    var categoryUrl=Feng.ctxPath + "/adverseReaction/category/"
+    +this.adverseReactionInfoData.id;
+	Feng.log('categoryUrl='+categoryUrl);
+    
+    //提交信息
+    var ajax = new $ax(categoryUrl, function(data){
+        Feng.success("分类成功!");
+        window.parent.AdverseReaction.table.refresh();
+        AdverseReactionInfoDlg.close();
+    },function(data){
+        Feng.error("修改失败!" + data.responseJSON.message + "!");
+    });
+    var category=Number(this.adverseReactionInfoData.category);
+    ajax.set("category",category);
+    ajax.start();
+}
+
 $(function() {
 	Feng.initValidator("adverseReactionInfo", AdverseReactionInfoDlg.validateFields);
 

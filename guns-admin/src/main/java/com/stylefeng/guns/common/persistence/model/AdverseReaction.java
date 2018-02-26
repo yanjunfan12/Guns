@@ -543,6 +543,7 @@ public class AdverseReaction extends Model<AdverseReaction> {
         "id=" + id +
         ", patientNumber=" + patientNumber +
         ", name=" + name +
+        ", category=" + category +
         ", radiotherapyCount=" + radiotherapyCount +
         ", chemotherapyCount=" + chemotherapyCount +
         ", weight=" + weight +
@@ -570,6 +571,7 @@ public class AdverseReaction extends Model<AdverseReaction> {
         ", createtime=" + createtime +
         ", updatetime=" + updatetime +
         ", createUser=" + createUser +
+        ", updateUser=" + updateUser +
         ", version=" + version +
         "}";
     }

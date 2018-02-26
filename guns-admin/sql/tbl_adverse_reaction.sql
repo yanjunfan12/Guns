@@ -35,8 +35,8 @@ CREATE TABLE `tbl_adverse_reaction` (
   `createtime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '填表日期',
   `updatetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改日期',
 
-  `create_user` varchar(45) DEFAULT NULL COMMENT '创建者',
-  `update_user` varchar(45) DEFAULT NULL COMMENT '创建者',
+  `create_user` varchar(45) DEFAULT NULL COMMENT '填表人',
+  `update_user` varchar(45) DEFAULT NULL COMMENT '更新人',
   `category` int(11) DEFAULT NULL COMMENT '分类  1 TF 2 TC 3 TP 4 术后大野 5 高剂量 6 低剂量 7 华蟾素 8 艾坦 9 SBRT',
   `version` int(11) DEFAULT NULL COMMENT '保留字段',
   PRIMARY KEY (`id`)

@@ -1,19 +1,37 @@
 <!--pages/photo/photo.wxml-->
 <view id="photo">
-  <view  class="section btn-area">
-    <button type="default" bindtap="back" >返回</button> 
-    <button type="default" bindtap="gotoShow" >选择照片</button> 
-    <button type="default" bindtap="uploadPhoto" >点击上传</button> 
+  <view class="page__hd">
+    <text class="page__title">治疗过程中不良反应附件</text>
   </view>
-  <view  class="section">
-    <image class= "show-image" mode="aspectFitf" src="{{src}}"></image>
+  <view class="section">
+    <view class="section__text">
+      姓名
+    </view>
+  </view>
+  <view class="section">
+    <view class="section__text">
+      <input bindblur="nameBindblur" maxlength="20" type="text" class="input-text" name="name" value="{{name}}" placeholder="请输入姓名" />
+    </view>
+  </view>
+  <view class="section">
+    <!--填充留白-->
+  </view>
+  <view class="section btn-area">
+    <button type="default" bindtap="gotoShow">选择照片</button>
+    <view class="section">
+      <!--填充留白-->
+    </view>
+    <button type="default" bindtap="uploadPhoto">点击上传</button>
+  </view>
+  <view class="section">
+    <image class="show-image" mode="aspectFitf" src="{{src}}"></image>
   </view>
 
   <!-- 确认框 及 提示框 -->
   <view class="page__bd">
-      <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
-          <view> 提示 </view>
-          <view> {{hints}} </view>
-      </modal>
+    <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
+      <view> 提示 </view>
+      <view> {{hints}} </view>
+    </modal>
   </view>
 </view>

@@ -53,7 +53,7 @@ public class RestDictController extends BaseController {
     		@RequestParam
     		String parentName) {
 
-    	log.info("获得parentName下拉框select2的数据字典,parentName="+parentName);
+    	log.debug("获得parentName下拉框select2的数据字典,parentName="+parentName);
 
     	List<Option> results=new ArrayList<Option>();
 

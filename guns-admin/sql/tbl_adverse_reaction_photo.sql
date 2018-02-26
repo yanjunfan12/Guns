@@ -8,7 +8,7 @@ CREATE TABLE `tbl_adverse_reaction_photo` (
   `name` varchar(45) not NULL COMMENT '姓名',
   `photo_path` varchar(245) NOT NULL COMMENT '图片路径',
 
-  `create_user` varchar(45) DEFAULT NULL COMMENT '创建者',
+  `create_user` varchar(45) DEFAULT NULL COMMENT '上传人',
   `createtime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '填表日期',
   `updatetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改日期',
 

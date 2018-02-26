@@ -119,32 +119,17 @@ AdverseReaction.exportAll = function () {
 };
 
 /**
- * 下载某一条不良反应的附件
+ * 跳转到给某一条不良反应分类页面
  */
-AdverseReaction.exportOne = function () {
-    if (this.check()) {
-        //提交信息
-    	var downloadUrl=Feng.ctxPath + "/adverseReactionPhoto/exportOne/" + AdverseReaction.seItem.id;
-
-        Feng.log("downloadUrl="+downloadUrl);
-
-        var form = $("<form></form>").attr("action", downloadUrl).attr("method", "post");
-        form.appendTo('body').submit().remove();
-    }
-};
-
-/**
- * 给某一条不良反应添加附件
- */
-AdverseReaction.openAddAdverseReactionPhoto = function () {
+AdverseReaction.openCategoryAdverseReaction = function () {
     if (this.check()) {
         var index = layer.open({
             type: 2,
-            title: '添加不良反应记录附件',
+            title: '分类不良反应记录',
             area: ['460px', '420px'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: Feng.ctxPath + '/adverseReaction/adverseReaction_upload/' + AdverseReaction.seItem.id
+            content: Feng.ctxPath + '/adverseReaction/adverseReaction_category/' + AdverseReaction.seItem.id
         });
         this.layerIndex = index;
     }

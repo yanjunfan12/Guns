@@ -7,12 +7,32 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "不良反应记录",
     "navigationBarTextStyle": "black"
   },
   "networkTimeout": {
     "request": 10000,
     "downloadFile": 10000
   },
-  "debug": true
+  "debug": true,
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "images/111.png",
+        "iconPath": "images/11.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "images/333.png",
+        "iconPath": "images/33.png",
+        "pagePath": "pages/photo/photo",
+        "text": "附件"
+      }
+    ]
+  }
+  
 }

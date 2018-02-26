@@ -5,16 +5,17 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.AdverseReactionPhoto">
         <id column="id" property="id" />
-        <result column="adverse_reaction_id" property="adverseReactionId" />
+        <result column="name" property="name" />
         <result column="photo_path" property="photoPath" />
         <result column="createtime" property="createtime" />
         <result column="updatetime" property="updatetime" />
         <result column="version" property="version" />
+        <result column="create_user" property="createUser" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, adverse_reaction_id AS adverseReactionId, photo_path AS photoPath, createtime, updatetime, version
+        id, name, photo_path AS photoPath, createtime, updatetime, version,create_user as createUser
     </sql>
 
 </mapper>

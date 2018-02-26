@@ -9,7 +9,7 @@
     </view>
     <view class="section">
       <view class="section__text">
-        <input type="text" class="input-text" name="name" value="{{name}}" placeholder="请输入姓名" />
+        <input maxlength="20" type="text" class="input-text" name="name" value="{{name}}" placeholder="请输入姓名" />
       </view>
     </view>
     <view class="section">
@@ -17,7 +17,7 @@
     </view>
     <view class="section">
       <view class="section__text">
-        <input type="number" class="input-text" name="patientNumber" value="{{patientNumber}}" placeholder="请输入住院号" />
+        <input maxlength="30" type="number" class="input-text" name="patientNumber" value="{{patientNumber}}" placeholder="请输入住院号" />
       </view>
     </view>
     <view class="section">
@@ -25,7 +25,7 @@
     </view>
     <view class="section">
       <view class="section__text">
-        <input type="number" class="input-text" name="radiotherapyCount" value="{{radiotherapyCount}}" placeholder="请输入放疗次数" />
+        <input maxlength="10" type="number" class="input-text" name="radiotherapyCount" value="{{radiotherapyCount}}" placeholder="请输入放疗次数" />
       </view>
     </view>
     <view class="section">
@@ -33,7 +33,7 @@
     </view>
     <view class="section">
       <view class="section__text">
-        <input type="number" class="input-text" name="chemotherapyCount" value="{{chemotherapyCount}}" placeholder="请输入化疗次数" />
+        <input maxlength="10" type="number" class="input-text" name="chemotherapyCount" value="{{chemotherapyCount}}" placeholder="请输入化疗次数" />
       </view>
     </view>
     <view class="section">
@@ -41,7 +41,7 @@
     </view>
     <view class="section">
       <view class="section__text">
-        <input type="digit" class="input-text" name="weight" value="{{weight}}" placeholder="请输入体重" />
+        <input maxlength="6" type="digit" class="input-text" name="weight" value="{{weight}}" placeholder="请输入体重" />
       </view>
     </view>
     <view class="section">
@@ -312,23 +312,23 @@
     </view>
     <view class="section">
       <view class="section__text">
-        <textarea name="otherStatusesDesc" value="{{otherStatusesDesc}}" class="textAera" auto-height="true" placeholder="请详细描述其他症状" maxlength="999" />
+        <textarea maxlength="990" name="otherStatusesDesc" value="{{otherStatusesDesc}}" class="textAera" auto-height="true" placeholder="请详细描述其他症状" maxlength="999" />
       </view>
     </view>
-    <view class="section"><!--填充留白-->
-      <view class="section__text"></view>
+    <view class="section">
+      <!--填充留白-->
     </view>
     <view class="section btn-area">
       <button formType="submit" class='button__submit'>提交</button>
-      <view class="section"><!--填充留白-->
-      <view class="section__text"></view>
+      <view class="section">
+        <!--填充留白-->
       </view>
       <button formType="reset" class='button__reset'>重填</button>
     </view>
   </form>
 
   <view class="section btn-area">
-      <button type="default" bindtap="refreshSelectOptions">刷新选项</button>
+    <button type="default" bindtap="refreshSelectOptions">刷新选项</button>
   </view>
 
   <!-- 黑框提示并消失 -->

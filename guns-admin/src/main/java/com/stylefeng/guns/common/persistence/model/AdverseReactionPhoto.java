@@ -1,14 +1,13 @@
 package com.stylefeng.guns.common.persistence.model;
 
 import java.io.Serializable;
-
-import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableField;
+
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.enums.IdType;
 
 /**
  * <p>
@@ -29,16 +28,30 @@ public class AdverseReactionPhoto extends Model<AdverseReactionPhoto> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     /**
-     * 治疗过程中不良反应记录（病人填表）主键id
+     * 姓名
      */
-    @TableField("adverse_reaction_id")
-    private Integer adverseReactionId;
+    @TableField("name")
+    private String name;
     /**
      * 图片路径
      */
     @TableField("photo_path")
     private String photoPath;
     /**
+     * 上传者
+     */
+    @TableField("create_user")
+    private String createUser;
+    
+    public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	/**
      * 填表日期
      */
     private Date createtime;
@@ -60,15 +73,15 @@ public class AdverseReactionPhoto extends Model<AdverseReactionPhoto> {
         this.id = id;
     }
 
-    public Integer getAdverseReactionId() {
-        return adverseReactionId;
-    }
+    public String getName() {
+		return name;
+	}
 
-    public void setAdverseReactionId(Integer adverseReactionId) {
-        this.adverseReactionId = adverseReactionId;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getPhotoPath() {
+	public String getPhotoPath() {
         return photoPath;
     }
 
@@ -109,8 +122,9 @@ public class AdverseReactionPhoto extends Model<AdverseReactionPhoto> {
     public String toString() {
         return "AdverseReactionPhoto{" +
         "id=" + id +
-        ", adverseReactionId=" + adverseReactionId +
+        ", name=" + name +
         ", photoPath=" + photoPath +
+        ", createUser=" + createUser +
         ", createtime=" + createtime +
         ", updatetime=" + updatetime +
         ", version=" + version +

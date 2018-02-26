@@ -30,11 +30,8 @@
                             @if(shiro.hasPermission("/adverseReaction/update")){
                                 <#button name="修改" icon="fa-plus" clickFun="AdverseReaction.openAdverseReactionDetail()" space="true"/>
                             @}
-                            @if(shiro.hasPermission("/adverseReactionPhoto/upload")){
-                                <#button name="上传附件" icon="fa-plus" clickFun="AdverseReaction.openAddAdverseReactionPhoto()" space="true"/>
-                            @}
-                            @if(shiro.hasPermission("/adverseReactionPhoto/exportOne")){
-                                <#button name="下载附件" icon="fa-plus" clickFun="AdverseReaction.exportOne()" space="true"/>
+                            @if(shiro.hasPermission("/adverseReaction/category")){
+                                <#button name="分类" icon="fa-plus" clickFun="AdverseReaction.openCategoryAdverseReaction()" space="true"/>
                             @}
                         </div>
                         <#table id="AdverseReactionTable"/>
