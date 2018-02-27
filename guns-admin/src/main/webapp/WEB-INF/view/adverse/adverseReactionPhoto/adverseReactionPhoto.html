@@ -1,0 +1,38 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>不良反应记录附件管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="name" name="姓名" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="AdverseReactionPhoto.search()"/>
+                                @if(shiro.hasPermission("/adverseReactionPhoto/exportAll")){
+                                	<#button name="全部导出" icon="fa-search" clickFun="AdverseReactionPhoto.exportAll()"/>
+                                @}
+                                @if(shiro.hasPermission("/adverseReactionPhoto/downloadAll")){
+                                	<#button name="下载全部附件" icon="fa-search" clickFun="AdverseReactionPhoto.downloadAll()"/>
+                                @}
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="AdverseReactionPhotoTableToolbar" role="group">
+                            @if(shiro.hasPermission("/adverseReactionPhoto/exportOne")){
+                                <#button name="下载附件" icon="fa-plus" clickFun="AdverseReactionPhoto.exportOne()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="AdverseReactionPhotoTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/adverse/adverseReactionPhoto/adverseReactionPhoto.js"></script>
+@}

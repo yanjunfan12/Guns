@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,8 +41,6 @@ import com.stylefeng.guns.core.page.PageInfoBT;
 import com.stylefeng.guns.modular.adverse.service.IAdverseReactionService;
 import com.stylefeng.guns.modular.adverse.warpper.AdverseReactionWarpper;
 
-import io.swagger.annotations.ApiOperation;
-
 /**
  * 不良反应记录控制器
  *
@@ -53,6 +51,46 @@ import io.swagger.annotations.ApiOperation;
 @Controller
 @RequestMapping("/adverseReaction")
 public class AdverseReactionController extends BaseController {
+	
+	/**
+	 *  Excel表头中文到数据库字段名的映射
+	 */
+	public static final Map<String,String> TITLE_2_KEY=new LinkedHashMap<String,String>();
+	static {
+		TITLE_2_KEY.put("主键id", "id");
+		TITLE_2_KEY.put("住院号", "patientNumber");
+		TITLE_2_KEY.put("姓名", "name");
+		TITLE_2_KEY.put("分类", "categoryName");
+		TITLE_2_KEY.put("放疗次数 ", "radiotherapyCount");
+		TITLE_2_KEY.put("化疗次数", "chemotherapyCount");
+		TITLE_2_KEY.put("体重", "weight");
+		TITLE_2_KEY.put("目前饮食", "dietaryStatusName");
+		TITLE_2_KEY.put("乏力", "weakStatusName");
+		TITLE_2_KEY.put("恶心", "nauseaStatusName");
+		TITLE_2_KEY.put("呕吐", "vomitStatusName");
+		TITLE_2_KEY.put("腹泻", "diarrheaStatusName");
+		TITLE_2_KEY.put("便秘", "constipationStatusName");
+		TITLE_2_KEY.put("肌肉关节痛", "muscleJointPainStatusName");
+		TITLE_2_KEY.put("神经系统", "nervousSystemStatusName");
+		TITLE_2_KEY.put("脱发", "alopeciaStatusName");
+		TITLE_2_KEY.put("发热", "feverStatusName");
+		TITLE_2_KEY.put("咳嗽", "coughStatusName");
+		TITLE_2_KEY.put("放射性皮肤损伤", "skinStatusName");
+		TITLE_2_KEY.put("打嗝", "hiccupStatusName");
+		TITLE_2_KEY.put("口腔黏膜炎", "oralMucositisStatusName");
+		TITLE_2_KEY.put("声嘶 ", "hoarsenessStatusName");
+		TITLE_2_KEY.put("听力损伤", "hearingStatusName");
+		TITLE_2_KEY.put("头晕 ", "dizzyStatusName");
+		TITLE_2_KEY.put("头痛  ", "headacheStatusName");
+		TITLE_2_KEY.put("肺炎", "pneumoniaStatusName");
+		TITLE_2_KEY.put("进食痛", "esophagitisStatusName");
+		TITLE_2_KEY.put("其他症状", "otherStatusesDesc");
+		TITLE_2_KEY.put("填表人", "createUser");
+		TITLE_2_KEY.put("更新人", "updateUser");
+		TITLE_2_KEY.put("填表日期", "createtime");
+		TITLE_2_KEY.put("修改日期", "updatetime");
+
+	}
 
 	private Log log = LogFactory.getLog(AdverseReactionController.class);
 
@@ -116,7 +154,7 @@ public class AdverseReactionController extends BaseController {
     }
 
     /**
-     * 获取不良反应记录列表
+     * 分页获取不良反应记录列表
      */
     @Permission
     @RequestMapping(value = "/list")
@@ -142,7 +180,7 @@ public class AdverseReactionController extends BaseController {
     	Page<Map<String, Object>> pageResult = adverseReactionService.selectMapsPage(page,adverseReactionEntityWrapper);
     	List<Map<String, Object>> rows=(List<Map<String, Object>>) super.warpObject(new AdverseReactionWarpper(pageResult.getRecords()));
 
-    	PageInfoBT<Map<String, Object>> bt=new PageInfoBT();
+    	PageInfoBT<Map<String, Object>> bt=new PageInfoBT<Map<String, Object>>();
     	bt.setRows(rows);
     	bt.setTotal(pageResult.getTotal());;
 
@@ -209,24 +247,31 @@ public class AdverseReactionController extends BaseController {
      */
     @Permission
     @RequestMapping(value = "/exportAll")
-    public ResponseEntity<byte[]> exportAll(@RequestParam(required = false) String name, @RequestParam(required = false) String patientNumber) throws IOException {
+    public ResponseEntity<byte[]> exportAll(@RequestParam(required = false) String name
+    		, @RequestParam(required = false) String patientNumber
+    		, @RequestParam(required = false) Integer category) throws IOException {
         EntityWrapper<AdverseReaction> adverseReactionEntityWrapper = new EntityWrapper<AdverseReaction>();
         if(!StringUtils.isBlank(name))
         	adverseReactionEntityWrapper.like("name", name,SqlLike.RIGHT);
         if(!StringUtils.isBlank(patientNumber))
         	adverseReactionEntityWrapper.eq("patient_number", patientNumber);
+        if(null!=category)
+        	adverseReactionEntityWrapper.eq("category", category);
+        
         String[] colArray={"createtime"};
         Collection<String> cols=Arrays.asList(colArray);
 		adverseReactionEntityWrapper.orderDesc(cols);
 
         List<Map<String, Object>> list=selectPage(adverseReactionEntityWrapper);
-        byte[] bytes=ExcelUtils.buildBytes(list);
+        byte[] bytes=ExcelUtils.buildBytes(list,TITLE_2_KEY);
 		return renderFile("sxssf.xlsx", bytes);
     }
 
     /**
      *
      * 分页选取
+     *
+     * 还需要生产者消费者模式，分页消耗掉
      *
      * @param adverseReactionEntityWrapper
      * @return
@@ -237,7 +282,7 @@ public class AdverseReactionController extends BaseController {
     	int offset=0;
     	Page<AdverseReaction> page=null;
     	int total=0;
-    	List<Map<String, Object>> list=new ArrayList<Map<String, Object>>();
+    	List<Map<String, Object>> list=new ArrayList<Map<String, Object>>();//这可能的大对象，需要去除
 
     	do{
     		page = new Page<>((offset / range + 1), range);

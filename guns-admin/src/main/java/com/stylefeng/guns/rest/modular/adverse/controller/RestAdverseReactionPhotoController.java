@@ -86,7 +86,7 @@ public class RestAdverseReactionPhotoController extends BaseController {
      * @return
      */
     private int processOne(MultipartFile file, String name,String createUser) {
-        String pictureName = name+"_"+UUID.randomUUID().toString() + "_" +  file.getOriginalFilename() + ".jpg";
+        String pictureName = name+"_"+UUID.randomUUID().toString() + "_" +  file.getOriginalFilename();
         try {
             String fileSavePath = gunsProperties.getFileUploadPath();
             file.transferTo(new File(fileSavePath + pictureName));

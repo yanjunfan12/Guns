@@ -23,22 +23,17 @@ public class ZipUtils {
 	/**
 	 * @param out
 	 * @param fileSavePath
-	 * @param photos
+	 * @param noDulPhotoPathSet
 	 * @throws Exception
 	 */
-	public static void zipOut(OutputStream out,String fileSavePath, List<AdverseReactionPhoto> photos) throws Exception {
+	public static void zipOut(OutputStream out,String fileSavePath, Set<String> noDulPhotoPathSet) throws Exception {
         // 文件输出流
         ZipOutputStream zos=null;
         try {
 
 	        zos=new ZipOutputStream(out);
-	        Set<String> noDulSet=new HashSet<String>();
-			for(AdverseReactionPhoto p : photos) {
-		        String fileName=p.getPhotoPath();
-		        noDulSet.add(fileName);
-	        }
 
-			for(String fileName:noDulSet) {
+			for(String fileName:noDulPhotoPathSet) {
 				String path=fileSavePath+fileName;
 		        File file=new File(path);
 		        log.debug(file.getAbsolutePath());

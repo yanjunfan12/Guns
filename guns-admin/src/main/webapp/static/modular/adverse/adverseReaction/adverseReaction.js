@@ -111,10 +111,12 @@ AdverseReaction.exportAll = function () {
 
     var nameCon = $("#name").val();
     var patientNumberCon = $("#patientNumber").val();
+    var categoryCon=$("#category").val();
 
     var form = $("<form></form>").attr("action", downloadUrl).attr("method", "post");
     form.append($("<input></input>").attr("type", "hidden").attr("name", "name").attr("value", nameCon));
     form.append($("<input></input>").attr("type", "hidden").attr("name", "patientNumber").attr("value", patientNumberCon));
+    form.append($("<input></input>").attr("type", "hidden").attr("name", "category").attr("value", categoryCon));
     form.appendTo('body').submit().remove();
 };
 
