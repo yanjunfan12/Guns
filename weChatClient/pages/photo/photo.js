@@ -70,8 +70,11 @@ Page({
       that.modalTap2("姓名不能为空");
       return;
     }
+
     var theUrl = app.globalData.fanUrlHead + '/adverseReactionPhoto/upload/'+name+'/'+theId;
     console.log("theUrl=" + theUrl);
+    theUrl = encodeURI(theUrl);
+    console.log("encodeURI theUrl=" + theUrl);
     var theSrc = that.data.src;
     console.log("theSrc=" + JSON.stringify(theSrc));
     if (theSrc.length<1){
@@ -81,11 +84,16 @@ Page({
     }
 
     wx.uploadFile({
-      url: theUrl, //仅为示例 
+      url: theUrl, 
       filePath: theSrc[0],
       name: 'file',
       success: function (res) {        
         console.log("上传成功返回：" + JSON.stringify(res));
+        if(200!=res.statusCode){
+          that.modalTap2('上传失败:' + res.statusCode+res.errMsg);
+          return ;
+        }
+
         var obj = JSON.parse(res.data);
         var resultCode = obj.code;
         var msg = obj.message;
@@ -113,9 +121,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      id: options.id
-    })
     this.getUserInfo();
   },
   getUserInfo: function () {

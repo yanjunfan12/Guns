@@ -6,6 +6,8 @@ import java.util.UUID;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -46,6 +48,8 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping("/rest/adverseReactionPhoto")
 public class RestAdverseReactionPhotoController extends BaseController {
 
+	private Log log = LogFactory.getLog(RestAdverseReactionPhotoController.class);
+	
     @Autowired
     private GunsProperties gunsProperties;
 
@@ -68,6 +72,9 @@ public class RestAdverseReactionPhotoController extends BaseController {
     		@NotBlank(message="上传人入参不能为空")
     		@PathVariable("createUser") String createUser) {
 
+    	log.debug("上传一个图片附件，并新增图片附件记录,name="+name
+    			+",createUser="+createUser);
+    	
     	name=null==name?null:name.trim();
     	
     	Tip t=validate(name);
@@ -112,6 +119,7 @@ public class RestAdverseReactionPhotoController extends BaseController {
     	wrapper.eq("name", name);
 		int count=adverseReactionService.selectCount(wrapper);
 		if(count<1) {
+			log.warn("没有此不良反应记录,姓名="+name);
 			return new ErrorTip(404,"没有此不良反应记录,姓名="+name);
 		}
 
