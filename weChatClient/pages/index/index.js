@@ -109,7 +109,7 @@ Page({
       },
       fail: function () {
         console.error("submit fail " + JSON.stringify(formData));
-        that.modalTap2('提交失败,请重新提交');
+        that.modalTap2('提交失败,请确保网络可用后,重新提交');
       },
       complete: function () {
       }
@@ -257,174 +257,64 @@ Page({
   refreshSelectOptions: function(){
     this.getUserInfo();
     this.resetSelectOptions();
-    this.setData({
-      toast1Hidden: false,
-      notice_str: '刷新选项完成'
-    });
+
   },
   resetSelectOptions: function(){//重置选项
     var that = this;
 
-    this.getOptions('乏力',
+    var ps = new Array();
+    ps.push('乏力');
+    ps.push('目前饮食');
+    ps.push('恶心');
+    ps.push('呕吐');
+    ps.push('腹泻');
+    ps.push('便秘');
+    ps.push('肌肉关节痛');
+    ps.push('神经系统');
+    ps.push('脱发');
+    ps.push('发热');
+    ps.push('咳嗽');
+    ps.push('放射性皮肤损伤');
+    ps.push('打嗝');
+    ps.push('口腔黏膜炎');
+    ps.push('声嘶');
+    ps.push('听力损伤');
+    ps.push('头晕');
+    ps.push('头痛');
+    ps.push('肺炎');
+    ps.push('进食痛');
+
+    this.getAllOptions(ps,
       function (parentName, data) {
         console.log(parentName + " data=" + JSON.stringify(data));
         that.setData({
-          weakStatusArray: data
+          weakStatusArray: data.乏力,
+          dietaryStatusArray: data.目前饮食,
+          nauseaStatusArray: data.恶心,
+          vomitStatusArray: data.呕吐,
+          diarrheaStatusArray: data.腹泻,
+          constipationStatusArray: data.便秘,
+          muscleJointPainStatusArray: data.肌肉关节痛,
+          nervousSystemStatusArray: data.神经系统,
+          alopeciaStatusArray: data.脱发,
+          feverStatusArray: data.发热,
+          coughStatusArray: data.咳嗽,
+          skinStatusArray: data.放射性皮肤损伤,
+          hiccupStatusArray: data.打嗝,
+          oralMucositisStatusArray: data.口腔黏膜炎,
+          hoarsenessStatusArray: data.声嘶,
+          hearingStatusArray: data.听力损伤,
+          dizzyStatusArray: data.头晕,
+          headacheStatusArray: data.头痛,
+          pneumoniaStatusArray: data.肺炎,
+          esophagitisStatusArray: data.进食痛
         });
-      }
-    );
-    this.getOptions('目前饮食',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
         that.setData({
-          dietaryStatusArray: data
+          toast1Hidden: false,
+          notice_str: '刷新选项完成'
         });
       }
-    );
-    this.getOptions('恶心',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          nauseaStatusArray: data
-        });
-      }
-    );
-    this.getOptions('呕吐',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          vomitStatusArray: data
-        });
-      }
-    );
-    this.getOptions('腹泻',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          diarrheaStatusArray: data
-        });
-      }
-    );
-    this.getOptions('便秘',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          constipationStatusArray: data
-        });
-      }
-    );
-    this.getOptions('肌肉关节痛',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          muscleJointPainStatusArray: data
-        });
-      }
-    );
-    this.getOptions('神经系统',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          nervousSystemStatusArray: data
-        });
-      }
-    );
-    this.getOptions('脱发',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          alopeciaStatusArray: data
-        });
-      }
-    );
-    this.getOptions('发热',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          feverStatusArray: data
-        });
-      }
-    );
-    this.getOptions('咳嗽',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          coughStatusArray: data
-        });
-      }
-    );
-    this.getOptions('放射性皮肤损伤',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          skinStatusArray: data
-        });
-      }
-    );
-    this.getOptions('打嗝',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          hiccupStatusArray: data
-        });
-      }
-    );
-    this.getOptions('口腔黏膜炎',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          oralMucositisStatusArray: data
-        });
-      }
-    );
-    this.getOptions('声嘶',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          hoarsenessStatusArray: data
-        });
-      }
-    );
-    this.getOptions('听力损伤',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          hearingStatusArray: data
-        });
-      }
-    );
-    this.getOptions('头晕',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          dizzyStatusArray: data
-        });
-      }
-    );
-    this.getOptions('头痛',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          headacheStatusArray: data
-        });
-      }
-    );
-    this.getOptions('肺炎',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          pneumoniaStatusArray: data
-        });
-      }
-    );
-    this.getOptions('进食痛',
-      function (parentName, data) {
-        console.log(parentName + " data=" + JSON.stringify(data));
-        that.setData({
-          esophagitisStatusArray: data
-        });
-      }
-    );
+    );   
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -472,32 +362,27 @@ Page({
   onUnload: function () {
     // 页面关闭
   },
-  getOptions: function (parentName, func) {//
+  getAllOptions: function (parentNames, func) {//parentNames父节点字典名称集合,func成功返回后的会掉函数
+    console.log(" getAllOptions parentNames=" + JSON.stringify(parentNames));
     var that = this;
-    console.log("parentName=" + parentName);
     wx.request({
-      url: app.globalData.fanUrlHead + '/dict/selectOptions',
-      data: {
-        'parentName': parentName
-      },
-      method: 'GET',
+      url: app.globalData.fanUrlHead + '/dict/selectAllOptions',
+      data: parentNames,
+      method: 'POST',
       header: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
-        console.log(parentName + " getOptions res=" + JSON.stringify(res));
-        func(parentName,res.data);
+        console.log(JSON.stringify(parentNames) + " getAllOptions res=" + JSON.stringify(res));
+        func(parentNames, res.data);
       },
       fail: function () {
-        console.error(parentName + " getOptions fail");
-        that.setData({
-          toast1Hidden: false,
-          notice_str: '初始化失败,请确保网络可用,刷新选项后使用'
-        });
-      },
+        console.error(JSON.stringify(parentNames) + " getAllOptions fail");
+        that.modalTap2('初始化失败,请确保网络可用,刷新选项后使用');
+       },
       complete: function () {
       }
-    })      
+    })   
   },
   formSubmit: function (e) {
     console.log('formSubmit e=', e);
