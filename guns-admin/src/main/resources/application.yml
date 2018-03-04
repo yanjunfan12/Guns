@@ -7,7 +7,7 @@ guns:
   swagger-open: true #是否开启swagger (true/false)
   kaptcha-open: true #是否开启登录时验证码 (true/false)
   session-open: false #是否开启session超时验证（受影响的类SessionTimeoutInterceptor） (true/false)
-  file-upload-path: E:/gunPhoto  #文件上传目录(不配置的话为java.io.tmpdir目录)
+  file-upload-path: /root/photo  #文件上传目录(不配置的话为java.io.tmpdir目录)
   muti-datasource-open: false #是否开启多数据源(true/false)
   spring-session-open: false #是否开启spring session,如果是多机环境需要开启(true/false)
   session-invalidate-time: 1800 #session失效时间(只在单机环境下生效，多机环境在SpringSessionConfig类中配置) 单位：秒
@@ -83,7 +83,7 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false
     username: root
-    password: root
+    password: Root@2018
     db-name: guns
     filters: log4j,wall,mergeStat
 
@@ -93,16 +93,16 @@ guns:
     datasource:
       url: jdbc:mysql://127.0.0.1:3306/guns_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false
       username: root
-      password: root
+      password: Root@2018
   muti-datasource:
     default-dataSource-name: dataSourceGuns #默认的数据源名称
     url: jdbc:mysql://127.0.0.1:3306/guns_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false
     username: root
-    password: root
+    password: Root@2018
 
 logging:
   level.root: info
-  level.com.stylefeng: debug
+  level.com.stylefeng: info
   path: logs/
   file: guns.log
 
@@ -116,11 +116,11 @@ spring:
   datasource:
       url: jdbc:mysql://127.0.0.1:3306/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false
       username: root
-      password: root
+      password: Root@2018
       filters: log4j,wall,mergeStat
 
 logging:
-  level.root: warn
+  level.root: info
   path: logs/
   file: guns.log
 

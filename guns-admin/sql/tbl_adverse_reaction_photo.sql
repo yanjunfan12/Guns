@@ -16,3 +16,6 @@ CREATE TABLE `tbl_adverse_reaction_photo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COMMENT='治疗过程中不良反应记录（病人填表）的图片附件';
 
+ALTER TABLE `tbl_adverse_reaction_photo` ADD INDEX index_name ( `name` ) ;
+ALTER TABLE `tbl_adverse_reaction_photo` ADD INDEX index_createtime ( `createtime` ) ;
+ALTER TABLE `tbl_adverse_reaction_photo` ADD INDEX index_updatetime ( `updatetime` ) ;

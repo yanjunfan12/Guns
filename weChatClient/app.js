@@ -1,5 +1,5 @@
 //app.js
-const urlHead = 'http://192.168.1.104:80/rest';
+const urlHead = 'http://111.231.140.74:80/rest';
 
 App({
   onLaunch: function () {

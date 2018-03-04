@@ -42,3 +42,9 @@ CREATE TABLE `tbl_adverse_reaction` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='治疗过程中不良反应记录（病人填表）';
 
+
+ALTER TABLE `tbl_adverse_reaction` ADD INDEX index_name ( `name` ) ;
+ALTER TABLE `tbl_adverse_reaction` ADD INDEX index_patient_number ( `patient_number` ) ;
+ALTER TABLE `tbl_adverse_reaction` ADD INDEX index_category ( `category` ) ;
+ALTER TABLE `tbl_adverse_reaction` ADD INDEX index_createtime ( `createtime` ) ;
+ALTER TABLE `tbl_adverse_reaction` ADD INDEX index_updatetime ( `updatetime` ) ;
