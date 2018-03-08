@@ -1,5 +1,5 @@
 //app.js
-const urlHead = 'http://111.231.140.74:80/rest';
+const urlHead = 'https://www.eso-shanghai.cn/rest';
 
 App({
   onLaunch: function () {

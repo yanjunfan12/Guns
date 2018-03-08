@@ -16,7 +16,12 @@ guns:
 
 ###################  项目启动端口  ###################
 server:
-  port: 80
+  port: 443
+  ssl:
+    key-store: classpath:www.eso-shanghai.cn.jks #(证书存放路径,就是src/main/resources/ 目录下,既classpath目录下,所以前面加上classpath:)
+    key-store-password: 691g9q0m8g #(就是上面之前设置的密码)
+    keyStoreType: JKS #(证书格式,PKCS12格式就是指 p12文件,)
+    #keyAlias: 1 #(这个是别名,是之前查用领查询出的别名1,貌似大部分情况私有秘钥privateKey都是1,)
 
 ###################  beetl配置  ###################
 beetl:
